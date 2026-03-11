@@ -304,11 +304,6 @@ select.risk-high { color: #dc2626; }
     <div class="card-title">New Engagement Details</div>
     <div class="card-subtitle">Enter the key details for this M&A transaction review.</div>
     <div class="form-grid">
-      <div class="form-group full">
-        <label class="form-label">Anthropic API Key</label>
-        <input class="form-input" type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
-        <div class="form-hint">Stored in memory only — never persisted to the database.</div>
-      </div>
       <div class="form-group">
         <label class="form-label">Target Company Name</label>
         <input class="form-input" type="text" id="companyName" placeholder="e.g. Acme Services LLC">
@@ -512,7 +507,6 @@ async function confirmDelete() {
       state.dealValue = '';
       state.analystName = '';
       state.engagementDate = '';
-      state.apiKey = '';
       document.getElementById('headerMeta').innerHTML = '';
       document.getElementById('saveIndicator').style.display = 'none';
       SECTIONS.forEach(section => {
@@ -539,27 +533,12 @@ async function loadSelectedDeal() {
   const id = document.getElementById('existingDealSelect').value;
   if (!id) return;
 
-  const apiKey = document.getElementById('apiKey').value.trim();
-  if (!apiKey) {
-    const errEl = document.getElementById('setupError');
-    errEl.textContent = 'Please enter your Anthropic API key before loading a deal.';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (!apiKey.startsWith('sk-ant-')) {
-    const errEl = document.getElementById('setupError');
-    errEl.textContent = 'Please enter a valid Anthropic API key (starts with sk-ant-).';
-    errEl.style.display = 'block';
-    return;
-  }
-
   try {
     const { data, error } = await db.from('deals').select('*').eq('id', id).single();
     if (error || !data) { alert('Could not load deal. Please try again.'); return; }
 
     // Restore metadata
     state.dealId = data.id;
-    state.apiKey = apiKey;
     state.companyName = data.name;
     state.dealValue = data.deal_value || '';
     state.analystName = data.analyst || '';
@@ -648,7 +627,6 @@ function setSaveStatus(status) {
 
 // ─── State ───────────────────────────────────────────────────────────────────
 const state = {
-  apiKey: '',
   companyName: '',
   dealValue: '',
   analystName: '',
@@ -779,37 +757,30 @@ SECTIONS.forEach(section => {
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
 function goToScreen(screen) {
-  if (screen !== 'setup' && !state.apiKey) return;
+  if (screen !== 'setup' && !state.companyName) return;
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen' + screen.charAt(0).toUpperCase() + screen.slice(1)).classList.add('active');
   ['setup','checklist','report'].forEach(s => {
     const el = document.getElementById('nav' + s.charAt(0).toUpperCase() + s.slice(1));
     el.classList.remove('active','completed','disabled');
     if (s === screen) el.classList.add('active');
-    else if (!state.apiKey) el.classList.add('disabled');
+    else if (!state.companyName) el.classList.add('disabled');
     else el.classList.add('completed');
   });
-  if (screen === 'setup' && state.apiKey) document.getElementById('apiKey').value = state.apiKey;
   if (screen === 'checklist') renderChecklist();
   if (screen === 'report') renderReportSummary();
 }
 
 // ─── Setup ───────────────────────────────────────────────────────────────────
 function startEngagement() {
-  const apiKey = document.getElementById('apiKey').value.trim();
   const companyName = document.getElementById('companyName').value.trim();
   const dealValue = document.getElementById('dealValue').value.trim();
   const analystName = document.getElementById('analystName').value.trim();
   const engagementDate = document.getElementById('engagementDate').value;
   const errEl = document.getElementById('setupError');
 
-  if (!apiKey || !companyName || !dealValue || !analystName) {
+  if (!companyName || !dealValue || !analystName) {
     errEl.textContent = 'Please complete all required fields before proceeding.';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (!apiKey.startsWith('sk-ant-')) {
-    errEl.textContent = 'Please enter a valid Anthropic API key (starts with sk-ant-).';
     errEl.style.display = 'block';
     return;
   }
@@ -824,7 +795,6 @@ function startEngagement() {
     });
   });
 
-  state.apiKey = apiKey;
   state.companyName = companyName;
   state.dealValue = dealValue;
   state.analystName = analystName;
@@ -1129,14 +1099,9 @@ async function generateReport() {
   streamStatus.style.display = 'flex';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('/api/proxy', {
       method: 'POST',
-      headers: {
-        'x-api-key': state.apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-        'anthropic-dangerous-direct-browser-calls': 'true'
-      },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 8000,
@@ -1187,7 +1152,7 @@ async function generateReport() {
   } catch (err) {
     streamStatus.style.display = 'none';
     reportOutput.classList.remove('streaming');
-    reportError.textContent = `Error: ${err.message}. Please check your API key and try again.`;
+    reportError.textContent = `Error: ${err.message}. Please try again.`;
     reportError.style.display = 'block';
     generateCta.style.display = 'block';
     generateBtn.textContent = 'Generate Report';
@@ -1273,7 +1238,6 @@ function copyReport() {
 
 // ─── Document Analysis ────────────────────────────────────────────────────────
 function triggerDocUpload(sectionId, itemId) {
-  if (!state.apiKey) { alert('Please enter your Anthropic API key on the Setup screen first.'); return; }
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'application/pdf,.xlsx,.xls';
@@ -1384,14 +1348,9 @@ Guidelines:
 - suspicious: true if you find inconsistencies, potential fraud indicators, unusual redactions, suspicious dates, missing signatures, or other red flags
 - flags array should be specific and actionable; empty array [] if none found`;
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetch('/api/proxy', {
     method: 'POST',
-    headers: {
-      'x-api-key': state.apiKey,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-      'anthropic-dangerous-direct-browser-calls': 'true'
-    },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       model: 'claude-opus-4-6',
       max_tokens: 1024,
@@ -1464,7 +1423,7 @@ function showAnalysisToast(type, itemTitle, analysis, errorMsg) {
     iconEl.textContent = '⚠';
     titleEl.textContent = 'Analysis Failed';
     bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span>
-      <div style="color:#fca5a5;">Error: ${errorMsg || 'Unknown error. Check your API key and try again.'}</div>`;
+      <div style="color:#fca5a5;">Error: ${errorMsg || 'Unknown error. Please try again.'}</div>`;
   } else if (type === 'warning') {
     iconEl.textContent = '🚩';
     titleEl.textContent = 'Suspicious Document Detected';
