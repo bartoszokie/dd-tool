@@ -789,6 +789,7 @@ function goToScreen(screen) {
     else if (!state.apiKey) el.classList.add('disabled');
     else el.classList.add('completed');
   });
+  if (screen === 'setup' && state.apiKey) document.getElementById('apiKey').value = state.apiKey;
   if (screen === 'checklist') renderChecklist();
   if (screen === 'report') renderReportSummary();
 }
