@@ -6,6 +6,7 @@
 <title>M&A Due Diligence Tool</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
@@ -1274,7 +1275,7 @@ function triggerDocUpload(sectionId, itemId) {
   if (!state.apiKey) { alert('Please enter your Anthropic API key on the Setup screen first.'); return; }
   const input = document.createElement('input');
   input.type = 'file';
-  input.accept = 'application/pdf';
+  input.accept = 'application/pdf,.xlsx,.xls';
   input.onchange = e => {
     const file = e.target.files[0];
     if (file) handleDocUpload(file, sectionId, itemId);
@@ -1283,38 +1284,81 @@ function triggerDocUpload(sectionId, itemId) {
 }
 
 function handleDocUpload(file, sectionId, itemId) {
-  if (file.type !== 'application/pdf') {
-    alert('Only PDF files are supported. Please upload a PDF document.');
+  const ext = file.name.split('.').pop().toLowerCase();
+  const isPdf = file.type === 'application/pdf' || ext === 'pdf';
+  const isExcel = ext === 'xlsx' || ext === 'xls';
+
+  if (!isPdf && !isExcel) {
+    alert('Only PDF and Excel files (.pdf, .xlsx, .xls) are supported.');
     return;
   }
   if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large (max 32 MB). Please upload a smaller PDF.');
+    alert('File is too large (max 32 MB). Please upload a smaller file.');
     return;
   }
 
   const btn = document.getElementById('upload-btn-' + itemId);
   if (btn) { btn.textContent = 'Analyzing…'; btn.disabled = true; btn.classList.add('analyzing'); btn.classList.remove('done'); }
 
+  const section = SECTIONS.find(s => s.id === sectionId);
+  const item = section?.items.find(i => i.id === itemId);
   const reader = new FileReader();
-  reader.onload = async e => {
-    const base64 = e.target.result.split(',')[1];
-    const section = SECTIONS.find(s => s.id === sectionId);
-    const item = section?.items.find(i => i.id === itemId);
-    try {
-      await analyzeDocumentWithClaude(base64, item.title, sectionId, itemId);
-    } catch (err) {
-      showAnalysisToast('error', item ? item.title : itemId, null, err.message);
+
+  if (isPdf) {
+    reader.onload = async e => {
+      const base64 = e.target.result.split(',')[1];
+      try {
+        await analyzeDocumentWithClaude(base64, 'pdf', item.title, sectionId, itemId);
+      } catch (err) {
+        showAnalysisToast('error', item ? item.title : itemId, null, err.message);
+        if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
+      }
+    };
+    reader.onerror = () => {
+      alert('Could not read the file. Please try again.');
       if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
-    }
-  };
-  reader.onerror = () => {
-    alert('Could not read the file. Please try again.');
-    if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
-  };
-  reader.readAsDataURL(file);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    // Excel: read as ArrayBuffer and convert to text via SheetJS
+    reader.onload = async e => {
+      try {
+        const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+        const sheetText = excelWorkbookToText(workbook, file.name);
+        await analyzeDocumentWithClaude(sheetText, 'excel', item.title, sectionId, itemId);
+      } catch (err) {
+        showAnalysisToast('error', item ? item.title : itemId, null, err.message);
+        if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
+      }
+    };
+    reader.onerror = () => {
+      alert('Could not read the file. Please try again.');
+      if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
+    };
+    reader.readAsArrayBuffer(file);
+  }
 }
 
-async function analyzeDocumentWithClaude(base64Data, itemTitle, sectionId, itemId) {
+function excelWorkbookToText(workbook, filename) {
+  const parts = [`Excel file: ${filename}\n`];
+  for (const sheetName of workbook.SheetNames) {
+    const sheet = workbook.Sheets[sheetName];
+    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+    const nonEmpty = rows.filter(r => r.some(c => c !== ''));
+    if (!nonEmpty.length) continue;
+    parts.push(`\n--- Sheet: ${sheetName} ---`);
+    const header = nonEmpty[0].map(h => String(h ?? '').trim());
+    parts.push('| ' + header.join(' | ') + ' |');
+    parts.push('| ' + header.map(() => '---').join(' | ') + ' |');
+    for (const row of nonEmpty.slice(1, 501)) {
+      parts.push('| ' + row.map(c => String(c ?? '').replace(/\|/g, '\\|').trim()).join(' | ') + ' |');
+    }
+    if (nonEmpty.length > 501) parts.push(`*(${nonEmpty.length - 501} more rows not shown)*`);
+  }
+  return parts.join('\n');
+}
+
+async function analyzeDocumentWithClaude(content, fileType, itemTitle, sectionId, itemId) {
   const prompt = `You are a senior M&A due diligence analyst reviewing a document for an acquisition.
 
 The checklist item this document is meant to satisfy is:
@@ -1352,13 +1396,14 @@ Guidelines:
       max_tokens: 1024,
       messages: [{
         role: 'user',
-        content: [
-          {
-            type: 'document',
-            source: { type: 'base64', media_type: 'application/pdf', data: base64Data }
-          },
-          { type: 'text', text: prompt }
-        ]
+        content: fileType === 'pdf'
+          ? [
+              { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: content } },
+              { type: 'text', text: prompt }
+            ]
+          : [
+              { type: 'text', text: `The following is the content of an Excel spreadsheet:\n\n${content}\n\n${prompt}` }
+            ]
       }]
     })
   });
