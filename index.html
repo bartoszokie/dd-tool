@@ -1187,7 +1187,52 @@ async function startBulkAnalysis() {
   bulkRunning = false;
   document.getElementById('bulkDoneBtn').style.display = 'inline-block';
   document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
-  renderChecklist(); // refresh main checklist
+  renderChecklist();
+  renderBulkSummary();
+}
+function renderBulkSummary() {
+  const matched = bulkFiles.filter(f => f.status === 'done').length;
+  const skipped = bulkFiles.filter(f => f.status === 'skipped').length;
+  const errors  = bulkFiles.filter(f => f.status === 'error').length;
+  // Find checklist items still missing (not yet received)
+  const missing = [];
+  SECTIONS.forEach(s => s.items.forEach(i => {
+    if (!state.checklist[s.id][i.id].docReceived)
+      missing.push({ section: s.label, title: i.title });
+  }));
+  const summaryHtml = `
+    <div style="margin-top:20px; border-top:2px solid #e8ecf0; padding-top:20px;">
+      <div style="font-size:14px;font-weight:700;color:#0d1b2a;margin-bottom:12px;">📊 Bulk Upload Summary</div>
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:100px;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:#059669;">${matched}</div>
+          <div style="font-size:11px;color:#6b7c93;font-weight:600;text-transform:uppercase;">Matched & Analyzed</div>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:#d97706;">${skipped}</div>
+          <div style="font-size:11px;color:#6b7c93;font-weight:600;text-transform:uppercase;">No Match Found</div>
+        </div>
+        <div style="flex:1;min-width:100px;background:${errors?'#fef2f2':'#f7f9fb'};border:1px solid ${errors?'#fca5a5':'#e8ecf0'};border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:${errors?'#dc2626':'#9aa5b4'};">${errors}</div>
+          <div style="font-size:11px;color:#6b7c93;font-weight:600;text-transform:uppercase;">Errors</div>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:22px;font-weight:800;color:#dc2626;">${missing.length}</div>
+          <div style="font-size:11px;color:#6b7c93;font-weight:600;text-transform:uppercase;">Still Missing</div>
+        </div>
+      </div>
+      ${missing.length > 0 ? `
+        <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:8px;">📋 Documents still missing — chase these:</div>
+        <div style="max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;">
+          ${missing.map(m => `
+            <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:7px 10px;font-size:11px;">
+              <span style="color:#9aa5b4;font-weight:600;">[${m.section}]</span>
+              <span style="color:#2d3748;margin-left:6px;">${m.title}</span>
+            </div>`).join('')}
+        </div>` : `<div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:12px;text-align:center;font-size:13px;font-weight:600;color:#059669;">✓ All checklist items have been received!</div>`}
+    </div>`;
+  document.getElementById('bulkModalBody').insertAdjacentHTML('beforeend', summaryHtml);
+  document.getElementById('bulkModalBody').scrollTop = document.getElementById('bulkModalBody').scrollHeight;
 }
 async function identifyDocument(file, allItems) {
   // Build a compact checklist index for Claude
