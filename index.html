@@ -20,17 +20,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .header-meta span { color: #a8c4e0; font-weight: 600; }
 .save-indicator { display: none; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 20px; transition: all 0.3s; white-space: nowrap; }
 .save-indicator.save-pending { background: rgba(255,255,255,0.08); color: #7a9abf; }
-.save-indicator.save-saving { background: rgba(77,166,255,0.15); color: #4da6ff; }
-.save-indicator.save-saving::before { content:''; display:inline-block; width:7px; height:7px; border-radius:50%; background:#4da6ff; animation: pulse 1s ease-in-out infinite; }
+.save-indicator.save-saving { background: rgba(141,198,63,0.15); color: #8DC63F; }
+.save-indicator.save-saving::before { content:''; display:inline-block; width:7px; height:7px; border-radius:50%; background:#8DC63F; animation: pulse 1s ease-in-out infinite; }
 .save-indicator.save-saved { background: rgba(82,199,138,0.15); color: #52c78a; }
 .save-indicator.save-error { background: rgba(220,38,38,0.15); color: #f87171; }
 .nav-bar { background: #162032; border-bottom: 1px solid #1e2f45; padding: 0 32px; display: flex; align-items: center; gap: 0; }
 .nav-step { display: flex; align-items: center; padding: 12px 20px; font-size: 13px; font-weight: 500; color: #4a6a8a; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; gap: 8px; }
-.nav-step.active { color: #4da6ff; border-bottom-color: #4da6ff; }
+.nav-step.active { color: #8DC63F; border-bottom-color: #8DC63F; }
 .nav-step.completed { color: #52c78a; }
 .nav-step.disabled { pointer-events: none; opacity: 0.4; }
 .nav-step-num { width: 20px; height: 20px; border-radius: 50%; background: #1e2f45; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-.nav-step.active .nav-step-num { background: #4da6ff; color: #0d1b2a; }
+.nav-step.active .nav-step-num { background: #8DC63F; color: #0d1b2a; }
 .nav-step.completed .nav-step-num { background: #52c78a; color: #0d1b2a; }
 .nav-sep { color: #1e2f45; font-size: 18px; }
 .screen { display: none; padding: 40px 32px; max-width: 1300px; margin: 0 auto; }
@@ -46,13 +46,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .form-group.full { grid-column: 1 / -1; }
 .form-label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
 .form-input { padding: 10px 14px; border: 1.5px solid #dde3ec; border-radius: 7px; font-size: 14px; color: #1a1a2e; transition: border-color 0.2s, box-shadow 0.2s; background: #fafbfc; outline: none; }
-.form-input:focus { border-color: #4da6ff; box-shadow: 0 0 0 3px rgba(77,166,255,0.12); background: #fff; }
+.form-input:focus { border-color: #8DC63F; box-shadow: 0 0 0 3px rgba(141,198,63,0.12); background: #fff; }
 .btn { padding: 11px 24px; border-radius: 7px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
 .btn-primary { background: #0d1b2a; color: #fff; }
 .btn-primary:hover { background: #162032; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,27,42,0.3); }
 .btn-secondary { background: #f0f2f5; color: #4a5568; }
 .btn-secondary:hover { background: #e2e8f0; }
-.btn-teal { background: #0891b2; color: #fff; }
+.btn-teal { background: #8DC63F; color: #fff; }
 .btn-teal:hover { background: #0e7490; }
 .btn-danger { background: #fff; color: #dc2626; border: 1.5px solid #fca5a5; }
 .btn-danger:hover { background: #fef2f2; border-color: #dc2626; }
@@ -70,7 +70,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .load-deal-section h3 { font-size: 14px; font-weight: 700; color: #1e40af; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .load-deal-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
 .load-deal-select { flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid #bfdbfe; border-radius: 7px; font-size: 14px; color: #1a1a2e; background: #fff; outline: none; cursor: pointer; }
-.load-deal-select:focus { border-color: #4da6ff; }
+.load-deal-select:focus { border-color: #8DC63F; }
 .deal-count-badge { font-size: 11px; background: #dbeafe; color: #1e40af; border-radius: 20px; padding: 2px 8px; font-weight: 600; }
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
@@ -82,19 +82,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .tabs { display: flex; gap: 0; border-bottom: 2px solid #e8ecf0; margin-bottom: 0; overflow-x: auto; }
 .tab { padding: 12px 18px; font-size: 12px; font-weight: 600; color: #6b7c93; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; gap: 7px; }
 .tab:hover { color: #0d1b2a; }
-.tab.active { color: #4da6ff; border-bottom-color: #4da6ff; }
+.tab.active { color: #8DC63F; border-bottom-color: #8DC63F; }
 .tab-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; background: #e8ecf0; color: #6b7c93; }
-.tab.active .tab-badge { background: rgba(77,166,255,0.15); color: #4da6ff; }
+.tab.active .tab-badge { background: rgba(141,198,63,0.15); color: #8DC63F; }
 .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
 .progress-item { flex: 1; min-width: 130px; background: #fff; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
 .progress-item-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; margin-bottom: 6px; }
 .progress-item-value { font-size: 22px; font-weight: 800; color: #0d1b2a; }
 .progress-item-value.green { color: #1a7a4a; }
-.progress-item-value.teal { color: #0891b2; }
+.progress-item-value.teal { color: #8DC63F; }
 .progress-item-value.orange { color: #d97706; }
 .progress-item-value.red { color: #dc2626; }
 .progress-bar-wrap { background: #e8ecf0; border-radius: 4px; height: 6px; margin-top: 6px; }
-.progress-bar-fill { height: 100%; border-radius: 4px; background: #4da6ff; transition: width 0.4s; }
+.progress-bar-fill { height: 100%; border-radius: 4px; background: #8DC63F; transition: width 0.4s; }
 .checklist-table { width: 100%; border-collapse: collapse; }
 .checklist-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; padding: 10px 12px; background: #f7f9fb; border-bottom: 1.5px solid #e8ecf0; }
 .checklist-table th.center { text-align: center; }
@@ -104,7 +104,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .item-num { font-size: 11px; color: #c0cad5; font-weight: 700; width: 28px; }
 .item-title { font-size: 13px; font-weight: 500; color: #2d3748; line-height: 1.4; }
 select.status-select, select.risk-select { padding: 5px 8px; border: 1.5px solid #dde3ec; border-radius: 5px; font-size: 12px; font-weight: 500; cursor: pointer; background: #fafbfc; outline: none; width: 100%; }
-select.status-select:focus, select.risk-select:focus { border-color: #4da6ff; }
+select.status-select:focus, select.risk-select:focus { border-color: #8DC63F; }
 select.status-not-started { color: #9aa5b4; }
 select.status-in-progress { color: #d97706; border-color: #fbbf24; background: #fffbeb; }
 select.status-complete { color: #059669; border-color: #6ee7b7; background: #ecfdf5; }
@@ -118,14 +118,14 @@ select.risk-high { color: #dc2626; }
 .doc-status-yes { font-size: 10px; font-weight: 700; color: #059669; }
 .doc-status-no { font-size: 10px; font-weight: 700; color: #dc2626; }
 .notes-input { width: 100%; padding: 5px 8px; border: 1.5px solid #dde3ec; border-radius: 5px; font-size: 12px; color: #2d3748; resize: vertical; min-height: 32px; max-height: 80px; font-family: inherit; outline: none; background: #fafbfc; }
-.notes-input:focus { border-color: #4da6ff; background: #fff; }
+.notes-input:focus { border-color: #8DC63F; background: #fff; }
 .checklist-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
 .report-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
 .report-title h2 { font-size: 22px; font-weight: 800; color: #0d1b2a; }
 .report-title p { font-size: 13px; color: #6b7c93; margin-top: 4px; }
 .report-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .report-output { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 40px; min-height: 400px; position: relative; }
-.report-output.streaming { border: 1.5px solid #4da6ff; box-shadow: 0 0 0 3px rgba(77,166,255,0.08); }
+.report-output.streaming { border: 1.5px solid #8DC63F; box-shadow: 0 0 0 3px rgba(141,198,63,0.08); }
 .report-content { font-size: 14px; line-height: 1.8; color: #2d3748; white-space: pre-wrap; }
 .report-content h1 { font-size: 22px; font-weight: 800; color: #0d1b2a; margin: 0 0 8px 0; }
 .report-content h2 { font-size: 17px; font-weight: 700; color: #0d1b2a; margin: 28px 0 10px; border-bottom: 2px solid #e8ecf0; padding-bottom: 6px; }
@@ -134,18 +134,18 @@ select.risk-high { color: #dc2626; }
 .report-content ul, .report-content ol { margin: 8px 0 12px 20px; }
 .report-content li { margin-bottom: 4px; }
 .report-content strong { color: #0d1b2a; }
-.streaming-cursor { display: inline-block; width: 2px; height: 16px; background: #4da6ff; animation: blink 0.8s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
+.streaming-cursor { display: inline-block; width: 2px; height: 16px; background: #8DC63F; animation: blink 0.8s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
 @keyframes blink { 50% { opacity: 0; } }
 .stream-status { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #6b7c93; margin-bottom: 16px; }
-.stream-dot { width: 8px; height: 8px; border-radius: 50%; background: #4da6ff; animation: pulse 1.2s ease-in-out infinite; }
+.stream-dot { width: 8px; height: 8px; border-radius: 50%; background: #8DC63F; animation: pulse 1.2s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 .generate-cta { text-align: center; padding: 60px 20px; }
 .generate-cta h3 { font-size: 20px; font-weight: 700; color: #0d1b2a; margin-bottom: 8px; }
 .generate-cta p { color: #6b7c93; margin-bottom: 28px; font-size: 14px; }
 .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
-.summary-card { background: #fff; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); border-left: 4px solid #4da6ff; }
+.summary-card { background: #fff; border-radius: 8px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); border-left: 4px solid #8DC63F; }
 .summary-card.green { border-left-color: #059669; }
-.summary-card.teal { border-left-color: #0891b2; }
+.summary-card.teal { border-left-color: #8DC63F; }
 .summary-card.orange { border-left-color: #d97706; }
 .summary-card.red { border-left-color: #dc2626; }
 .summary-card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; margin-bottom: 6px; }
@@ -153,8 +153,8 @@ select.risk-high { color: #dc2626; }
 .summary-card-sub { font-size: 11px; color: #9aa5b4; margin-top: 2px; }
 .error-box { background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 8px; padding: 16px 20px; color: #dc2626; font-size: 13px; margin-bottom: 16px; }
 .info-box { background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; color: #1e40af; font-size: 13px; margin-bottom: 16px; }
-.upload-btn { padding: 4px 9px; font-size: 11px; font-weight: 600; border-radius: 5px; border: 1.5px solid #0891b2; background: #f0f9ff; color: #0891b2; cursor: pointer; white-space: nowrap; transition: all 0.2s; display: block; width: 100%; text-align: center; }
-.upload-btn:hover:not(:disabled) { background: #0891b2; color: #fff; }
+.upload-btn { padding: 4px 9px; font-size: 11px; font-weight: 600; border-radius: 5px; border: 1.5px solid #8DC63F; background: #f5faea; color: #8DC63F; cursor: pointer; white-space: nowrap; transition: all 0.2s; display: block; width: 100%; text-align: center; }
+.upload-btn:hover:not(:disabled) { background: #8DC63F; color: #fff; }
 .upload-btn:disabled { opacity: 0.55; cursor: not-allowed; border-color: #9aa5b4; color: #9aa5b4; background: #f7f9fb; }
 .upload-btn.analyzing { border-color: #d97706; color: #d97706; background: #fffbeb; }
 .upload-btn.done { border-color: #059669; color: #059669; background: #ecfdf5; }
@@ -187,7 +187,7 @@ select.risk-high { color: #dc2626; }
 .bulk-modal-footer { padding: 16px 24px; border-top: 1px solid #e8ecf0; display: flex; gap: 10px; justify-content: flex-end; flex-shrink: 0; background: #f7f9fb; }
 /* Drop zone */
 .drop-zone { border: 2px dashed #bfdbfe; border-radius: 10px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: #f8faff; margin-bottom: 20px; }
-.drop-zone:hover, .drop-zone.drag-over { border-color: #4da6ff; background: #eff6ff; }
+.drop-zone:hover, .drop-zone.drag-over { border-color: #8DC63F; background: #f5faea; }
 .drop-zone-icon { font-size: 36px; margin-bottom: 10px; }
 .drop-zone-title { font-size: 15px; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
 .drop-zone-sub { font-size: 12px; color: #6b7c93; }
@@ -218,7 +218,7 @@ select.risk-high { color: #dc2626; }
 .bulk-progress-wrap { margin-bottom: 16px; }
 .bulk-progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #6b7c93; margin-bottom: 6px; }
 .bulk-progress-bar { height: 8px; background: #e8ecf0; border-radius: 4px; overflow: hidden; }
-.bulk-progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #4da6ff); border-radius: 4px; transition: width 0.4s; }
+.bulk-progress-fill { height: 100%; background: linear-gradient(90deg, #5a9a2a, #8DC63F); border-radius: 4px; transition: width 0.4s; }
 @media (max-width: 700px) {
   .screen { padding: 24px 16px; }
   .form-grid { grid-template-columns: 1fr; }
@@ -245,7 +245,7 @@ select.risk-high { color: #dc2626; }
 <div class="modal-overlay" id="setupModal">
   <div class="modal">
     <h2>One-time Database Setup Required</h2>
-    <p>Run the following SQL in your <a href="https://supabase.com/dashboard" target="_blank" style="color:#4da6ff;">Supabase SQL Editor</a> to create the <code>deals</code> table, then click "Done — Retry".</p>
+    <p>Run the following SQL in your <a href="https://supabase.com/dashboard" target="_blank" style="color:#8DC63F;">Supabase SQL Editor</a> to create the <code>deals</code> table, then click "Done — Retry".</p>
     <div class="sql-block" id="setupSql"></div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="document.getElementById('setupModal').classList.remove('open')">Dismiss</button>
@@ -301,9 +301,9 @@ select.risk-high { color: #dc2626; }
 <header class="header">
   <div class="header-brand">
     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" rx="6" fill="#1e3a5f"/>
-      <path d="M8 22L14 10l4 8 3-5 3 9" stroke="#4da6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="24" cy="8" r="3" fill="#52c78a"/>
+      <polygon points="16,1 31,16 16,31 1,16" fill="#8DC63F"/>
+      <path d="M10 15 L16 21 L22 15" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 10 L16 16 L22 10" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
     </svg>
     <div>
       <div class="header-title">VB Due Diligence System</div>
@@ -582,7 +582,7 @@ function setSaveStatus(status) {
 const state = { companyName: '', dealValue: '', analystName: '', engagementDate: '', activeTab: 'corporate', dealId: null, checklist: {} };
 // ─── Checklist Data ───────────────────────────────────────────────────────────
 const SECTIONS = [
-  { id: 'corporate', label: 'Corporate & Entity', color: '#4da6ff', items: [
+  { id: 'corporate', label: 'Corporate & Entity', color: '#8DC63F', items: [
     { id: 'c1',  title: 'Entity structure chart (all current members, partners, shareholders & ownership %)' },
     { id: 'c2',  title: 'Organizational chart showing all subsidiaries and affiliates' },
     { id: 'c3',  title: 'Certificate of Incorporation / Formation for the Company' },
@@ -633,7 +633,7 @@ const SECTIONS = [
     { id: 'fs7', title: 'Breakdown of revenue by product / service / customer (historic)' },
     { id: 'fs8', title: 'Summary of any off-balance-sheet items, contingent liabilities, or guarantees' }
   ]},
-  { id: 'capstructure', label: 'Capitalization', color: '#0891b2', items: [
+  { id: 'capstructure', label: 'Capitalization', color: '#8DC63F', items: [
     { id: 'cs1', title: 'Detailed cap table — all common equity holders with % ownership' },
     { id: 'cs2', title: 'Preferred equity schedule — series, terms, liquidation preferences' },
     { id: 'cs3', title: 'Option / warrant schedule (issued, outstanding, exercise price, vesting)' },
@@ -713,8 +713,8 @@ function renderProgressRow() {
   const docPct = Math.round((st.docsReceived / st.total) * 100);
   const reviewPct = Math.round((st.complete / st.total) * 100);
   document.getElementById('progressRow').innerHTML = `
-    <div class="progress-item"><div class="progress-item-label">Docs Received</div><div class="progress-item-value teal">${docPct}%</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div></div>
-    <div class="progress-item"><div class="progress-item-label">Received / Total</div><div class="progress-item-value teal">${st.docsReceived}<span style="font-size:14px;color:#9aa5b4;font-weight:400"> / ${st.total}</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">Docs Received</div><div class="progress-item-value teal">${docPct}%</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#8DC63F"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">Received / Total</div><div class="progress-item-value teal">${st.docsReceived}<span style="font-size:14px;color:#9aa5b4;font-weight:400"> / ${st.total}</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#8DC63F"></div></div></div>
     <div class="progress-item"><div class="progress-item-label">Review Complete</div><div class="progress-item-value green">${st.complete}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${reviewPct}%;background:#059669"></div></div></div>
     <div class="progress-item"><div class="progress-item-label">In Progress</div><div class="progress-item-value orange">${st.inProgress}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.inProgress/st.total*100).toFixed(0)}%;background:#d97706"></div></div></div>
     <div class="progress-item"><div class="progress-item-label">Flagged</div><div class="progress-item-value red">${st.flagged}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.flagged/st.total*100).toFixed(0)}%;background:#dc2626"></div></div></div>
@@ -891,7 +891,7 @@ function exportToPDF() {
   const btn = document.getElementById('pdfBtn'); btn.textContent = 'Generating PDF...'; btn.disabled = true;
   const container = document.createElement('div');
   container.style.cssText = 'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1a2e;padding:0;';
-  container.innerHTML = `<div style="background:#0d1b2a;color:#fff;padding:24px 32px;"><div style="font-size:20px;font-weight:800;">DealScope</div><div style="font-size:11px;color:#7a9abf;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">M&A Due Diligence Report</div></div>
+  container.innerHTML = `<div style="background:#0d1b2a;color:#fff;padding:24px 32px;"><div style="font-size:20px;font-weight:800;">VB Due Diligence System</div><div style="font-size:11px;color:#7a9abf;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">Due Diligence Report</div></div>
     <div style="background:#162032;color:#a8c4e0;padding:12px 32px;font-size:12px;display:flex;gap:32px;flex-wrap:wrap;margin-bottom:32px;">
       <span><strong style="color:#fff;">Target:</strong> ${state.companyName}</span><span><strong style="color:#fff;">Deal Value:</strong> ${state.dealValue}</span>
       <span><strong style="color:#fff;">Analyst:</strong> ${state.analystName}</span><span><strong style="color:#fff;">Date:</strong> ${state.engagementDate}</span></div>
