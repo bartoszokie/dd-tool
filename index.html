@@ -10,8 +10,6 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
-
-/* Header */
 .header { background: #0d1b2a; color: #fff; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.4); position: sticky; top: 0; z-index: 100; }
 .header-brand { display: flex; align-items: center; gap: 12px; }
 .header-brand svg { width: 32px; height: 32px; }
@@ -20,16 +18,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .header-right { display: flex; align-items: center; gap: 20px; }
 .header-meta { text-align: right; font-size: 12px; color: #7a9abf; line-height: 1.6; }
 .header-meta span { color: #a8c4e0; font-weight: 600; }
-
-/* Save indicator */
 .save-indicator { display: none; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 20px; transition: all 0.3s; white-space: nowrap; }
 .save-indicator.save-pending { background: rgba(255,255,255,0.08); color: #7a9abf; }
 .save-indicator.save-saving { background: rgba(77,166,255,0.15); color: #4da6ff; }
 .save-indicator.save-saving::before { content:''; display:inline-block; width:7px; height:7px; border-radius:50%; background:#4da6ff; animation: pulse 1s ease-in-out infinite; }
 .save-indicator.save-saved { background: rgba(82,199,138,0.15); color: #52c78a; }
 .save-indicator.save-error { background: rgba(220,38,38,0.15); color: #f87171; }
-
-/* Nav Breadcrumb */
 .nav-bar { background: #162032; border-bottom: 1px solid #1e2f45; padding: 0 32px; display: flex; align-items: center; gap: 0; }
 .nav-step { display: flex; align-items: center; padding: 12px 20px; font-size: 13px; font-weight: 500; color: #4a6a8a; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; gap: 8px; }
 .nav-step.active { color: #4da6ff; border-bottom-color: #4da6ff; }
@@ -39,17 +33,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .nav-step.active .nav-step-num { background: #4da6ff; color: #0d1b2a; }
 .nav-step.completed .nav-step-num { background: #52c78a; color: #0d1b2a; }
 .nav-sep { color: #1e2f45; font-size: 18px; }
-
-/* Screens */
 .screen { display: none; padding: 40px 32px; max-width: 1300px; margin: 0 auto; }
 .screen.active { display: block; }
-
-/* Cards */
 .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 24px; }
 .card-title { font-size: 16px; font-weight: 700; color: #0d1b2a; margin-bottom: 4px; }
 .card-subtitle { font-size: 13px; color: #6b7c93; margin-bottom: 24px; }
-
-/* Setup Form */
 .setup-header { text-align: center; margin-bottom: 40px; }
 .setup-header h1 { font-size: 28px; font-weight: 800; color: #0d1b2a; margin-bottom: 8px; }
 .setup-header p { color: #6b7c93; font-size: 15px; }
@@ -59,7 +47,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .form-label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
 .form-input { padding: 10px 14px; border: 1.5px solid #dde3ec; border-radius: 7px; font-size: 14px; color: #1a1a2e; transition: border-color 0.2s, box-shadow 0.2s; background: #fafbfc; outline: none; }
 .form-input:focus { border-color: #4da6ff; box-shadow: 0 0 0 3px rgba(77,166,255,0.12); background: #fff; }
-.form-hint { font-size: 11px; color: #9aa5b4; margin-top: 2px; }
 .btn { padding: 11px 24px; border-radius: 7px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
 .btn-primary { background: #0d1b2a; color: #fff; }
 .btn-primary:hover { background: #162032; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,27,42,0.3); }
@@ -69,8 +56,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .btn-teal:hover { background: #0e7490; }
 .btn-danger { background: #fff; color: #dc2626; border: 1.5px solid #fca5a5; }
 .btn-danger:hover { background: #fef2f2; border-color: #dc2626; }
-
-/* Delete confirm dialog */
+.btn-purple { background: #7c3aed; color: #fff; }
+.btn-purple:hover { background: #6d28d9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124,58,237,0.35); }
 .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 2000; align-items: center; justify-content: center; }
 .confirm-overlay.open { display: flex; }
 .confirm-box { background: #fff; border-radius: 10px; padding: 28px 32px; max-width: 400px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
@@ -79,16 +66,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .confirm-actions { display: flex; gap: 10px; justify-content: flex-end; }
 .btn-lg { padding: 14px 36px; font-size: 15px; }
 .form-actions { display: flex; justify-content: flex-end; margin-top: 28px; gap: 12px; }
-
-/* Load existing deal section */
 .load-deal-section { background: #f0f7ff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; }
 .load-deal-section h3 { font-size: 14px; font-weight: 700; color: #1e40af; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .load-deal-row { display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
 .load-deal-select { flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid #bfdbfe; border-radius: 7px; font-size: 14px; color: #1a1a2e; background: #fff; outline: none; cursor: pointer; }
 .load-deal-select:focus { border-color: #4da6ff; }
 .deal-count-badge { font-size: 11px; background: #dbeafe; color: #1e40af; border-radius: 20px; padding: 2px 8px; font-weight: 600; }
-
-/* Table setup modal */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { background: #fff; border-radius: 12px; padding: 32px; max-width: 640px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
@@ -96,16 +79,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .modal p { font-size: 13px; color: #6b7c93; margin-bottom: 16px; line-height: 1.6; }
 .sql-block { background: #0d1b2a; color: #a8c4e0; font-family: 'Courier New', monospace; font-size: 12px; padding: 16px; border-radius: 8px; white-space: pre; overflow-x: auto; margin-bottom: 16px; line-height: 1.6; }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
-
-/* Tabs */
 .tabs { display: flex; gap: 0; border-bottom: 2px solid #e8ecf0; margin-bottom: 0; overflow-x: auto; }
 .tab { padding: 12px 18px; font-size: 12px; font-weight: 600; color: #6b7c93; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; gap: 7px; }
 .tab:hover { color: #0d1b2a; }
 .tab.active { color: #4da6ff; border-bottom-color: #4da6ff; }
 .tab-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; background: #e8ecf0; color: #6b7c93; }
 .tab.active .tab-badge { background: rgba(77,166,255,0.15); color: #4da6ff; }
-
-/* Progress */
 .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
 .progress-item { flex: 1; min-width: 130px; background: #fff; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
 .progress-item-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; margin-bottom: 6px; }
@@ -116,8 +95,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .progress-item-value.red { color: #dc2626; }
 .progress-bar-wrap { background: #e8ecf0; border-radius: 4px; height: 6px; margin-top: 6px; }
 .progress-bar-fill { height: 100%; border-radius: 4px; background: #4da6ff; transition: width 0.4s; }
-
-/* Checklist Table */
 .checklist-table { width: 100%; border-collapse: collapse; }
 .checklist-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; padding: 10px 12px; background: #f7f9fb; border-bottom: 1.5px solid #e8ecf0; }
 .checklist-table th.center { text-align: center; }
@@ -126,7 +103,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .checklist-table tr:hover td { background: #fafbfc; }
 .item-num { font-size: 11px; color: #c0cad5; font-weight: 700; width: 28px; }
 .item-title { font-size: 13px; font-weight: 500; color: #2d3748; line-height: 1.4; }
-
 select.status-select, select.risk-select { padding: 5px 8px; border: 1.5px solid #dde3ec; border-radius: 5px; font-size: 12px; font-weight: 500; cursor: pointer; background: #fafbfc; outline: none; width: 100%; }
 select.status-select:focus, select.risk-select:focus { border-color: #4da6ff; }
 select.status-not-started { color: #9aa5b4; }
@@ -136,20 +112,14 @@ select.status-flag { color: #dc2626; border-color: #fca5a5; background: #fef2f2;
 select.risk-low { color: #059669; }
 select.risk-medium { color: #d97706; }
 select.risk-high { color: #dc2626; }
-
-/* Doc Received Checkbox */
 .doc-check-cell { text-align: center; width: 80px; }
 .doc-check-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .doc-check { width: 18px; height: 18px; cursor: pointer; accent-color: #059669; }
 .doc-status-yes { font-size: 10px; font-weight: 700; color: #059669; }
 .doc-status-no { font-size: 10px; font-weight: 700; color: #dc2626; }
-
 .notes-input { width: 100%; padding: 5px 8px; border: 1.5px solid #dde3ec; border-radius: 5px; font-size: 12px; color: #2d3748; resize: vertical; min-height: 32px; max-height: 80px; font-family: inherit; outline: none; background: #fafbfc; }
 .notes-input:focus { border-color: #4da6ff; background: #fff; }
-
 .checklist-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
-
-/* Report Screen */
 .report-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
 .report-title h2 { font-size: 22px; font-weight: 800; color: #0d1b2a; }
 .report-title p { font-size: 13px; color: #6b7c93; margin-top: 4px; }
@@ -181,11 +151,8 @@ select.risk-high { color: #dc2626; }
 .summary-card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9aa5b4; margin-bottom: 6px; }
 .summary-card-value { font-size: 26px; font-weight: 800; color: #0d1b2a; }
 .summary-card-sub { font-size: 11px; color: #9aa5b4; margin-top: 2px; }
-
 .error-box { background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 8px; padding: 16px 20px; color: #dc2626; font-size: 13px; margin-bottom: 16px; }
 .info-box { background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; color: #1e40af; font-size: 13px; margin-bottom: 16px; }
-
-/* Upload & Analyze */
 .upload-btn { padding: 4px 9px; font-size: 11px; font-weight: 600; border-radius: 5px; border: 1.5px solid #0891b2; background: #f0f9ff; color: #0891b2; cursor: pointer; white-space: nowrap; transition: all 0.2s; display: block; width: 100%; text-align: center; }
 .upload-btn:hover:not(:disabled) { background: #0891b2; color: #fff; }
 .upload-btn:disabled { opacity: 0.55; cursor: not-allowed; border-color: #9aa5b4; color: #9aa5b4; background: #f7f9fb; }
@@ -207,7 +174,51 @@ select.risk-high { color: #dc2626; }
 .analysis-toast-flags-title { font-weight: 700; color: #f87171; font-size: 11px; margin-bottom: 4px; }
 .analysis-toast-flag-item { color: #fca5a5; font-size: 11px; padding: 1px 0; }
 .analysis-toast-warn { background: rgba(217,119,6,0.12); border: 1px solid rgba(217,119,6,0.3); border-radius: 6px; padding: 6px 10px; margin-top: 8px; color: #fbbf24; font-size: 11px; }
-
+/* ── Bulk Upload Modal ─────────────────────────────────────────────────── */
+.bulk-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+.bulk-modal-overlay.open { display: flex; }
+.bulk-modal { background: #fff; border-radius: 14px; width: 100%; max-width: 680px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 24px 64px rgba(0,0,0,0.35); overflow: hidden; }
+.bulk-modal-header { background: #0d1b2a; color: #fff; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.bulk-modal-header h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.bulk-modal-header-sub { font-size: 11px; color: #7a9abf; margin-top: 2px; }
+.bulk-modal-close { cursor: pointer; opacity: 0.6; font-size: 22px; line-height: 1; }
+.bulk-modal-close:hover { opacity: 1; }
+.bulk-modal-body { flex: 1; overflow-y: auto; padding: 24px; }
+.bulk-modal-footer { padding: 16px 24px; border-top: 1px solid #e8ecf0; display: flex; gap: 10px; justify-content: flex-end; flex-shrink: 0; background: #f7f9fb; }
+/* Drop zone */
+.drop-zone { border: 2px dashed #bfdbfe; border-radius: 10px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: #f8faff; margin-bottom: 20px; }
+.drop-zone:hover, .drop-zone.drag-over { border-color: #4da6ff; background: #eff6ff; }
+.drop-zone-icon { font-size: 36px; margin-bottom: 10px; }
+.drop-zone-title { font-size: 15px; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
+.drop-zone-sub { font-size: 12px; color: #6b7c93; }
+.drop-zone-btn { display: inline-block; margin-top: 14px; padding: 8px 20px; background: #7c3aed; color: #fff; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+/* File queue list */
+.file-queue { display: flex; flex-direction: column; gap: 8px; }
+.file-row { background: #f7f9fb; border: 1px solid #e8ecf0; border-radius: 8px; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; transition: border-color 0.2s; }
+.file-row.processing { border-color: #fbbf24; background: #fffbeb; }
+.file-row.matched { border-color: #6ee7b7; background: #ecfdf5; }
+.file-row.error { border-color: #fca5a5; background: #fef2f2; }
+.file-row.skipped { border-color: #e2e8f0; background: #f7f9fb; opacity: 0.7; }
+.file-row-icon { font-size: 22px; flex-shrink: 0; }
+.file-row-info { min-width: 0; }
+.file-row-name { font-size: 13px; font-weight: 600; color: #0d1b2a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-row-match { font-size: 11px; color: #6b7c93; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-row-match.ok { color: #059669; }
+.file-row-match.warn { color: #d97706; }
+.file-row-match.err { color: #dc2626; }
+.file-row-status { flex-shrink: 0; font-size: 12px; font-weight: 600; }
+.status-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.badge-waiting { background: #e8ecf0; color: #6b7c93; }
+.badge-identifying { background: rgba(124,58,237,0.12); color: #7c3aed; }
+.badge-analyzing { background: rgba(217,119,6,0.12); color: #d97706; }
+.badge-done { background: rgba(5,150,105,0.12); color: #059669; }
+.badge-error { background: rgba(220,38,38,0.1); color: #dc2626; }
+.badge-skipped { background: #e8ecf0; color: #9aa5b4; }
+/* Overall progress bar */
+.bulk-progress-wrap { margin-bottom: 16px; }
+.bulk-progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #6b7c93; margin-bottom: 6px; }
+.bulk-progress-bar { height: 8px; background: #e8ecf0; border-radius: 4px; overflow: hidden; }
+.bulk-progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #4da6ff); border-radius: 4px; transition: width 0.4s; }
 @media (max-width: 700px) {
   .screen { padding: 24px 16px; }
   .form-grid { grid-template-columns: 1fr; }
@@ -219,7 +230,6 @@ select.risk-high { color: #dc2626; }
 </style>
 </head>
 <body>
-
 <!-- Delete Confirm Dialog -->
 <div class="confirm-overlay" id="deleteConfirm">
   <div class="confirm-box">
@@ -231,7 +241,6 @@ select.risk-high { color: #dc2626; }
     </div>
   </div>
 </div>
-
 <!-- Table Setup Modal -->
 <div class="modal-overlay" id="setupModal">
   <div class="modal">
@@ -244,7 +253,51 @@ select.risk-high { color: #dc2626; }
     </div>
   </div>
 </div>
-
+<!-- ── Bulk Upload Modal ──────────────────────────────────────────────────── -->
+<div class="bulk-modal-overlay" id="bulkModal">
+  <div class="bulk-modal">
+    <div class="bulk-modal-header">
+      <div>
+        <h2>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M6 6l4-4 4 4" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="#a78bfa" stroke-width="2" stroke-linecap="round"/></svg>
+          Upload Multiple Files
+        </h2>
+        <div class="bulk-modal-header-sub">Claude will identify each document and place it into the correct checklist item automatically</div>
+      </div>
+      <span class="bulk-modal-close" id="bulkModalCloseBtn">✕</span>
+    </div>
+    <div class="bulk-modal-body" id="bulkModalBody">
+      <!-- Drop zone (shown before files selected) -->
+      <div class="drop-zone" id="bulkDropZone">
+        <div class="drop-zone-icon">📂</div>
+        <div class="drop-zone-title">Drop files here or click to browse</div>
+        <div class="drop-zone-sub">Supports PDF and Excel files (.pdf, .xlsx, .xls) · Max 32 MB each</div>
+        <div class="drop-zone-btn" id="bulkBrowseBtn">Browse Files</div>
+        <input type="file" id="bulkFileInput" multiple accept="application/pdf,.xlsx,.xls" style="display:none">
+      </div>
+      <!-- File queue (shown after files selected) -->
+      <div id="bulkQueueSection" style="display:none;">
+        <div class="bulk-progress-wrap" id="bulkProgressWrap" style="display:none;">
+          <div class="bulk-progress-label">
+            <span id="bulkProgressLabel">Processing files…</span>
+            <span id="bulkProgressCount"></span>
+          </div>
+          <div class="bulk-progress-bar"><div class="bulk-progress-fill" id="bulkProgressFill" style="width:0%"></div></div>
+        </div>
+        <div class="file-queue" id="bulkFileQueue"></div>
+      </div>
+    </div>
+    <div class="bulk-modal-footer">
+      <button class="btn btn-secondary" id="bulkCancelBtn">Cancel</button>
+      <button class="btn btn-purple" id="bulkStartBtn" style="display:none;" onclick="startBulkAnalysis()">
+        ✦ Analyze All Files
+      </button>
+      <button class="btn btn-secondary" id="bulkDoneBtn" style="display:none;" onclick="closeBulkModal()">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
 <header class="header">
   <div class="header-brand">
     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -262,7 +315,6 @@ select.risk-high { color: #dc2626; }
     <div class="header-meta" id="headerMeta"></div>
   </div>
 </header>
-
 <nav class="nav-bar">
   <div class="nav-step active" id="navSetup" onclick="goToScreen('setup')">
     <div class="nav-step-num">1</div> Setup
@@ -276,15 +328,12 @@ select.risk-high { color: #dc2626; }
     <div class="nav-step-num">3</div> AI Report
   </div>
 </nav>
-
 <!-- SCREEN 1: SETUP -->
 <div class="screen active" id="screenSetup">
   <div class="setup-header">
     <h1>New Due Diligence Engagement</h1>
     <p>Configure your engagement details to begin the due diligence process.</p>
   </div>
-
-  <!-- Load existing deal -->
   <div class="load-deal-section" id="loadDealSection" style="display:none;">
     <h3>
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8z" stroke="#1e40af" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -299,7 +348,6 @@ select.risk-high { color: #dc2626; }
       <button class="btn btn-danger" onclick="promptDeleteDeal()">Delete Deal</button>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title">New Engagement Details</div>
     <div class="card-subtitle">Enter the key details for this M&A transaction review.</div>
@@ -327,7 +375,6 @@ select.risk-high { color: #dc2626; }
     </div>
   </div>
 </div>
-
 <!-- SCREEN 2: CHECKLIST -->
 <div class="screen" id="screenChecklist">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
@@ -335,25 +382,25 @@ select.risk-high { color: #dc2626; }
       <h2 style="font-size:22px; font-weight:800; color:#0d1b2a;" id="checklistHeading">Document Checklist</h2>
       <p style="font-size:13px; color:#6b7c93;" id="checklistSubheading"></p>
     </div>
-    <div style="display:flex;gap:10px;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-purple" onclick="openBulkModal()" style="display:flex;align-items:center;gap:8px;">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M6 6l4-4 4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        Upload Multiple Files
+      </button>
       <button class="btn btn-danger" onclick="promptDeleteCurrentDeal()">Delete Deal</button>
       <button class="btn btn-primary" onclick="goToScreen('report')">Generate AI Report &rarr;</button>
     </div>
   </div>
-
   <div class="progress-row" id="progressRow"></div>
-
   <div class="card" style="padding:0; overflow:hidden;">
     <div class="tabs" id="tabBar"></div>
     <div style="padding:0 24px 24px; overflow-x:auto;" id="tabContent"></div>
   </div>
-
   <div class="checklist-actions">
     <button class="btn btn-secondary" onclick="goToScreen('setup')">&larr; Edit Setup</button>
     <button class="btn btn-primary" onclick="goToScreen('report')">Proceed to AI Report &rarr;</button>
   </div>
 </div>
-
 <!-- SCREEN 3: REPORT -->
 <div class="screen" id="screenReport">
   <div class="report-header">
@@ -368,9 +415,7 @@ select.risk-high { color: #dc2626; }
       <button class="btn btn-primary" id="generateBtn" onclick="generateReport()">Generate Report</button>
     </div>
   </div>
-
   <div class="summary-grid" id="reportSummary"></div>
-
   <div class="report-output" id="reportOutput">
     <div class="generate-cta" id="generateCta">
       <h3>Ready to Generate Your Report</h3>
@@ -385,7 +430,6 @@ select.risk-high { color: #dc2626; }
     <div class="report-content" id="reportContent"></div>
   </div>
 </div>
-
 <!-- Analysis Toast -->
 <div class="analysis-toast" id="analysisToast">
   <div class="analysis-toast-header">
@@ -395,13 +439,11 @@ select.risk-high { color: #dc2626; }
   </div>
   <div class="analysis-toast-body" id="analysisToastBody"></div>
 </div>
-
 <script>
 // ─── Supabase ─────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://hhthvguwpiuqeiryidvr.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_ZlRgGjOsig16Dyyvx4TbWQ_sxnISYdT';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 const TABLE_SQL = `-- Run once in your Supabase SQL Editor
 create table if not exists deals (
   id uuid primary key default gen_random_uuid(),
@@ -413,14 +455,10 @@ create table if not exists deals (
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
-
 alter table deals enable row level security;
-
 create policy "public_access" on deals
   for all using (true) with check (true);`;
-
 document.getElementById('setupSql').textContent = TABLE_SQL;
-
 async function initSupabase() {
   try {
     const { error } = await db.from('deals').select('id').limit(1);
@@ -428,166 +466,97 @@ async function initSupabase() {
       if (error.code === '42P01' || error.message?.includes('does not exist') || error.message?.includes('relation')) {
         document.getElementById('setupModal').classList.add('open');
       }
-      // other errors (network etc.) — silently degrade, app still usable
     } else {
       await loadDealsDropdown();
     }
-  } catch (e) {
-    console.warn('Supabase init error:', e);
-  }
+  } catch (e) { console.warn('Supabase init error:', e); }
 }
-
 async function retryInit() {
   document.getElementById('setupModal').classList.remove('open');
   await initSupabase();
 }
-
 async function loadDealsDropdown() {
   try {
-    const { data, error } = await db
-      .from('deals')
-      .select('id, name, deal_value, analyst, updated_at')
-      .order('updated_at', { ascending: false });
+    const { data, error } = await db.from('deals').select('id, name, deal_value, analyst, updated_at').order('updated_at', { ascending: false });
     if (error || !data || data.length === 0) return;
-
     const select = document.getElementById('existingDealSelect');
     select.innerHTML = '<option value="">— Select a saved deal —</option>' +
       data.map(d => {
         const date = new Date(d.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         return `<option value="${d.id}">${d.name}${d.deal_value ? ' · ' + d.deal_value : ''} — ${date}</option>`;
       }).join('');
-
     document.getElementById('dealCountBadge').textContent = `${data.length} saved`;
     document.getElementById('loadDealSection').style.display = 'block';
-  } catch (e) {
-    console.warn('loadDealsDropdown error:', e);
-  }
+  } catch (e) { console.warn('loadDealsDropdown error:', e); }
 }
-
-let pendingDeleteId = null;
-let pendingDeleteName = '';
-
+let pendingDeleteId = null, pendingDeleteName = '';
 function promptDeleteDeal() {
   const select = document.getElementById('existingDealSelect');
   const id = select.value;
   if (!id) { alert('Please select a deal to delete.'); return; }
-  const name = select.options[select.selectedIndex].text;
   pendingDeleteId = id;
-  pendingDeleteName = name;
-  document.getElementById('deleteConfirmMsg').textContent =
-    `"${name}" and all its checklist data will be permanently deleted. This cannot be undone.`;
+  pendingDeleteName = select.options[select.selectedIndex].text;
+  document.getElementById('deleteConfirmMsg').textContent = `"${pendingDeleteName}" and all its checklist data will be permanently deleted. This cannot be undone.`;
   document.getElementById('deleteConfirm').classList.add('open');
 }
-
 function promptDeleteCurrentDeal() {
   if (!state.dealId) { alert('This deal has not been saved yet.'); return; }
   pendingDeleteId = state.dealId;
   pendingDeleteName = state.companyName;
-  document.getElementById('deleteConfirmMsg').textContent =
-    `"${state.companyName}" and all its checklist data will be permanently deleted. This cannot be undone.`;
+  document.getElementById('deleteConfirmMsg').textContent = `"${state.companyName}" and all its checklist data will be permanently deleted. This cannot be undone.`;
   document.getElementById('deleteConfirm').classList.add('open');
 }
-
 async function confirmDelete() {
   if (!pendingDeleteId) return;
   const btn = document.getElementById('deleteConfirmBtn');
-  btn.textContent = 'Deleting...';
-  btn.disabled = true;
-
+  btn.textContent = 'Deleting...'; btn.disabled = true;
   try {
     const { error } = await db.from('deals').delete().eq('id', pendingDeleteId);
     if (error) throw error;
-
     document.getElementById('deleteConfirm').classList.remove('open');
-
-    // If we just deleted the currently open deal, reset state and go to setup
     if (state.dealId === pendingDeleteId) {
-      state.dealId = null;
-      state.companyName = '';
-      state.dealValue = '';
-      state.analystName = '';
-      state.engagementDate = '';
+      state.dealId = null; state.companyName = ''; state.dealValue = ''; state.analystName = ''; state.engagementDate = '';
       document.getElementById('headerMeta').innerHTML = '';
       document.getElementById('saveIndicator').style.display = 'none';
       SECTIONS.forEach(section => {
         state.checklist[section.id] = {};
-        section.items.forEach(item => {
-          state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' };
-        });
+        section.items.forEach(item => { state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' }; });
       });
       goToScreen('setup');
     }
-
     await loadDealsDropdown();
-    pendingDeleteId = null;
-    pendingDeleteName = '';
-  } catch (e) {
-    alert('Delete failed: ' + e.message);
-  } finally {
-    btn.textContent = 'Delete Deal';
-    btn.disabled = false;
-  }
+    pendingDeleteId = null; pendingDeleteName = '';
+  } catch (e) { alert('Delete failed: ' + e.message); }
+  finally { btn.textContent = 'Delete Deal'; btn.disabled = false; }
 }
-
 async function loadSelectedDeal() {
   const id = document.getElementById('existingDealSelect').value;
   if (!id) return;
-
   try {
     const { data, error } = await db.from('deals').select('*').eq('id', id).single();
     if (error || !data) { alert('Could not load deal. Please try again.'); return; }
-
-    // Restore metadata
-    state.dealId = data.id;
-    state.companyName = data.name;
-    state.dealValue = data.deal_value || '';
-    state.analystName = data.analyst || '';
-    state.engagementDate = data.engagement_date || '';
-
-    // Restore checklist — merge saved data over defaults to handle schema additions
+    state.dealId = data.id; state.companyName = data.name; state.dealValue = data.deal_value || '';
+    state.analystName = data.analyst || ''; state.engagementDate = data.engagement_date || '';
     if (data.checklist_data) {
-      Object.keys(data.checklist_data).forEach(sectionId => {
-        if (state.checklist[sectionId]) {
-          Object.keys(data.checklist_data[sectionId]).forEach(itemId => {
-            if (state.checklist[sectionId][itemId]) {
-              Object.assign(state.checklist[sectionId][itemId], data.checklist_data[sectionId][itemId]);
-            }
+      Object.keys(data.checklist_data).forEach(sId => {
+        if (state.checklist[sId]) {
+          Object.keys(data.checklist_data[sId]).forEach(iId => {
+            if (state.checklist[sId][iId]) Object.assign(state.checklist[sId][iId], data.checklist_data[sId][iId]);
           });
         }
       });
     }
-
     document.getElementById('setupError').style.display = 'none';
-    document.getElementById('headerMeta').innerHTML =
-      `<div><span>${state.companyName}</span></div><div>Deal Value: <span>${state.dealValue}</span></div><div>Analyst: <span>${state.analystName}</span></div>`;
-
+    document.getElementById('headerMeta').innerHTML = `<div><span>${state.companyName}</span></div><div>Deal Value: <span>${state.dealValue}</span></div><div>Analyst: <span>${state.analystName}</span></div>`;
     goToScreen('checklist');
-  } catch (e) {
-    alert('Error loading deal: ' + e.message);
-  }
+  } catch (e) { alert('Error loading deal: ' + e.message); }
 }
-
 let saveTimeout = null;
-
-function queueSave() {
-  clearTimeout(saveTimeout);
-  setSaveStatus('pending');
-  saveTimeout = setTimeout(saveDeal, 1000);
-}
-
+function queueSave() { clearTimeout(saveTimeout); setSaveStatus('pending'); saveTimeout = setTimeout(saveDeal, 1000); }
 async function saveDeal() {
   if (!state.companyName) return;
   setSaveStatus('saving');
-
-  const payload = {
-    name: state.companyName,
-    deal_value: state.dealValue,
-    analyst: state.analystName,
-    engagement_date: state.engagementDate,
-    checklist_data: state.checklist,
-    updated_at: new Date().toISOString()
-  };
-
+  const payload = { name: state.companyName, deal_value: state.dealValue, analyst: state.analystName, engagement_date: state.engagementDate, checklist_data: state.checklist, updated_at: new Date().toISOString() };
   try {
     if (state.dealId) {
       const { error } = await db.from('deals').update(payload).eq('id', state.dealId);
@@ -596,166 +565,101 @@ async function saveDeal() {
       const { data, error } = await db.from('deals').insert(payload).select('id').single();
       if (error) throw error;
       state.dealId = data.id;
-      // Refresh dropdown in background
       loadDealsDropdown();
     }
     setSaveStatus('saved');
-  } catch (e) {
-    console.error('Save error:', e);
-    setSaveStatus('error');
-  }
+  } catch (e) { console.error('Save error:', e); setSaveStatus('error'); }
 }
-
 function setSaveStatus(status) {
   const el = document.getElementById('saveIndicator');
   if (!el) return;
-  const cfg = {
-    pending: { text: 'Unsaved changes', cls: 'save-pending' },
-    saving:  { text: 'Saving...',       cls: 'save-saving'  },
-    saved:   { text: 'Saved \u2713',    cls: 'save-saved'   },
-    error:   { text: 'Save failed',     cls: 'save-error'   }
-  };
+  const cfg = { pending: { text: 'Unsaved changes', cls: 'save-pending' }, saving: { text: 'Saving...', cls: 'save-saving' }, saved: { text: 'Saved \u2713', cls: 'save-saved' }, error: { text: 'Save failed', cls: 'save-error' } };
   const s = cfg[status];
-  el.textContent = s.text;
-  el.className = 'save-indicator ' + s.cls;
-  el.style.display = 'flex';
-  el.style.opacity = '1';
-  if (status === 'saved') {
-    setTimeout(() => { el.style.opacity = '0.5'; }, 3000);
-  }
+  el.textContent = s.text; el.className = 'save-indicator ' + s.cls; el.style.display = 'flex'; el.style.opacity = '1';
+  if (status === 'saved') setTimeout(() => { el.style.opacity = '0.5'; }, 3000);
 }
-
-// ─── State ───────────────────────────────────────────────────────────────────
-const state = {
-  companyName: '',
-  dealValue: '',
-  analystName: '',
-  engagementDate: '',
-  activeTab: 'corporate',
-  dealId: null,
-  checklist: {}
-};
-
-// ─── Checklist Data ──────────────────────────────────────────────────────────
+// ─── State ────────────────────────────────────────────────────────────────────
+const state = { companyName: '', dealValue: '', analystName: '', engagementDate: '', activeTab: 'corporate', dealId: null, checklist: {} };
+// ─── Checklist Data ───────────────────────────────────────────────────────────
 const SECTIONS = [
-  {
-    id: 'corporate',
-    label: 'Corporate & Entity',
-    color: '#4da6ff',
-    items: [
-      { id: 'c1',  title: 'Entity structure chart (all current members, partners, shareholders & ownership %)' },
-      { id: 'c2',  title: 'Organizational chart showing all subsidiaries and affiliates' },
-      { id: 'c3',  title: 'Certificate of Incorporation / Formation for the Company' },
-      { id: 'c4',  title: 'Certificate of Incorporation / Formation for Fund I' },
-      { id: 'c5',  title: 'Certificate of Incorporation / Formation for Softeq Partners I' },
-      { id: 'c6',  title: 'Certificate of Incorporation / Formation for the Investment Manager' },
-      { id: 'c7',  title: 'Current cap table — all classes of equity, members, partners & ownership %' },
-      { id: 'c8',  title: 'Operating / Limited Partnership Agreement — the Company' },
-      { id: 'c9',  title: 'Operating / Limited Partnership Agreement — Fund I' },
-      { id: 'c10', title: 'Operating / Limited Partnership Agreement — Softeq Partners I' },
-      { id: 'c11', title: 'Investment Management Agreement — Investment Manager' },
-      { id: 'c12', title: 'Side letters entered into by any of the above entities' },
-      { id: 'c13', title: 'Shareholder / investor agreements, voting agreements, right of first refusal agreements' },
-      { id: 'c14', title: 'Any amendments or restatements to any of the above' }
-    ]
-  },
-  {
-    id: 'contracts',
-    label: 'Legal: Contracts',
-    color: '#8b5cf6',
-    items: [
-      { id: 'mc1', title: 'List of all material contracts (customer, vendor, partner, revenue-sharing)' },
-      { id: 'mc2', title: 'All executed material contracts with third parties' },
-      { id: 'mc3', title: 'Any non-compete, non-solicitation, or exclusivity agreements' },
-      { id: 'mc4', title: 'Confidentiality / NDA agreements (template + any material deviations)' },
-      { id: 'mc5', title: 'Employment agreements for key personnel' },
-      { id: 'mc6', title: 'Consultant and independent contractor agreements' }
-    ]
-  },
-  {
-    id: 'litigation',
-    label: 'Legal: Litigation',
-    color: '#ef4444',
-    items: [
-      { id: 'ld1', title: 'Schedule of all active litigation, arbitration, or regulatory proceedings' },
-      { id: 'ld2', title: 'Active litigation case files (pleadings, key filings, current status)' },
-      { id: 'ld3', title: 'Historic litigation settlement documents and releases' },
-      { id: 'ld4', title: 'Demand letters received or sent in past 5 years' },
-      { id: 'ld5', title: 'Any consent decrees, injunctions, or regulatory orders' },
-      { id: 'ld6', title: 'Legal counsel confirmation / 10b-5 letter (standard)' }
-    ]
-  },
-  {
-    id: 'ip',
-    label: 'Legal: IP & Track Record',
-    color: '#10b981',
-    items: [
-      { id: 'ip1', title: 'IP ownership schedule (patents, trademarks, copyrights, domain names)' },
-      { id: 'ip2', title: 'Patent registrations and applications (including international)' },
-      { id: 'ip3', title: 'Trademark registrations and applications' },
-      { id: 'ip4', title: 'Material IP licenses (in-bound and out-bound)' },
-      { id: 'ip5', title: 'Evidence of Track Record — performance reports, audited returns, portfolio summaries' },
-      { id: 'ip6', title: 'Track Record verification / third-party attestation documentation' },
-      { id: 'ip7', title: 'Evidence that IP is free and clear of any liens or encumbrances' }
-    ]
-  },
-  {
-    id: 'financial',
-    label: 'Financial Statements',
-    color: '#f59e0b',
-    items: [
-      { id: 'fs1', title: 'Audited financial statements — most recent 3 fiscal years' },
-      { id: 'fs2', title: 'Unaudited financial statements — most recent interim period' },
-      { id: 'fs3', title: 'Auditor reports and management letters' },
-      { id: 'fs4', title: 'Auditor independence confirmation' },
-      { id: 'fs5', title: 'Management accounts — monthly / quarterly for current fiscal year' },
-      { id: 'fs6', title: 'Board-approved budgets and forecasts' },
-      { id: 'fs7', title: 'Breakdown of revenue by product / service / customer (historic)' },
-      { id: 'fs8', title: 'Summary of any off-balance-sheet items, contingent liabilities, or guarantees' }
-    ]
-  },
-  {
-    id: 'capstructure',
-    label: 'Capitalization',
-    color: '#0891b2',
-    items: [
-      { id: 'cs1', title: 'Detailed cap table — all common equity holders with % ownership' },
-      { id: 'cs2', title: 'Preferred equity schedule — series, terms, liquidation preferences' },
-      { id: 'cs3', title: 'Option / warrant schedule (issued, outstanding, exercise price, vesting)' },
-      { id: 'cs4', title: 'Convertible notes / SAFEs — all outstanding instruments with terms' },
-      { id: 'cs5', title: 'Any equity incentive plan documents (EIP / ESOP)' },
-      { id: 'cs6', title: 'Details of any dilutive securities not captured above' },
-      { id: 'cs7', title: 'Bank account details and authorized signatories schedule' }
-    ]
-  },
-  {
-    id: 'tax',
-    label: 'Tax',
-    color: '#d97706',
-    items: [
-      { id: 'tx1',  title: 'Federal income tax returns — most recent 3 fiscal years (all entities)' },
-      { id: 'tx2',  title: 'State and local income / franchise tax returns — most recent 3 fiscal years' },
-      { id: 'tx3',  title: 'Any open tax examinations, audits, or inquiries' },
-      { id: 'tx4',  title: 'Tax sharing, tax allocation, or tax indemnification agreements' },
-      { id: 'tx5',  title: 'Schedule of net operating losses (NOLs) and other tax attributes' },
-      { id: 'tx6',  title: 'Transfer pricing documentation (if applicable)' },
-      { id: 'tx7',  title: 'Sales & use tax compliance summary' },
-      { id: 'tx8',  title: 'Payroll tax filings — most recent 2 years' },
-      { id: 'tx9',  title: 'Any tax elections made (S-Corp, QEF, mark-to-market, etc.)' },
-      { id: 'tx10', title: 'Foreign tax filings and FBAR / FATCA compliance (if applicable)' }
-    ]
-  }
+  { id: 'corporate', label: 'Corporate & Entity', color: '#4da6ff', items: [
+    { id: 'c1',  title: 'Entity structure chart (all current members, partners, shareholders & ownership %)' },
+    { id: 'c2',  title: 'Organizational chart showing all subsidiaries and affiliates' },
+    { id: 'c3',  title: 'Certificate of Incorporation / Formation for the Company' },
+    { id: 'c4',  title: 'Certificate of Incorporation / Formation for Fund I' },
+    { id: 'c5',  title: 'Certificate of Incorporation / Formation for Softeq Partners I' },
+    { id: 'c6',  title: 'Certificate of Incorporation / Formation for the Investment Manager' },
+    { id: 'c7',  title: 'Current cap table — all classes of equity, members, partners & ownership %' },
+    { id: 'c8',  title: 'Operating / Limited Partnership Agreement — the Company' },
+    { id: 'c9',  title: 'Operating / Limited Partnership Agreement — Fund I' },
+    { id: 'c10', title: 'Operating / Limited Partnership Agreement — Softeq Partners I' },
+    { id: 'c11', title: 'Investment Management Agreement — Investment Manager' },
+    { id: 'c12', title: 'Side letters entered into by any of the above entities' },
+    { id: 'c13', title: 'Shareholder / investor agreements, voting agreements, right of first refusal agreements' },
+    { id: 'c14', title: 'Any amendments or restatements to any of the above' }
+  ]},
+  { id: 'contracts', label: 'Legal: Contracts', color: '#8b5cf6', items: [
+    { id: 'mc1', title: 'List of all material contracts (customer, vendor, partner, revenue-sharing)' },
+    { id: 'mc2', title: 'All executed material contracts with third parties' },
+    { id: 'mc3', title: 'Any non-compete, non-solicitation, or exclusivity agreements' },
+    { id: 'mc4', title: 'Confidentiality / NDA agreements (template + any material deviations)' },
+    { id: 'mc5', title: 'Employment agreements for key personnel' },
+    { id: 'mc6', title: 'Consultant and independent contractor agreements' }
+  ]},
+  { id: 'litigation', label: 'Legal: Litigation', color: '#ef4444', items: [
+    { id: 'ld1', title: 'Schedule of all active litigation, arbitration, or regulatory proceedings' },
+    { id: 'ld2', title: 'Active litigation case files (pleadings, key filings, current status)' },
+    { id: 'ld3', title: 'Historic litigation settlement documents and releases' },
+    { id: 'ld4', title: 'Demand letters received or sent in past 5 years' },
+    { id: 'ld5', title: 'Any consent decrees, injunctions, or regulatory orders' },
+    { id: 'ld6', title: 'Legal counsel confirmation / 10b-5 letter (standard)' }
+  ]},
+  { id: 'ip', label: 'Legal: IP & Track Record', color: '#10b981', items: [
+    { id: 'ip1', title: 'IP ownership schedule (patents, trademarks, copyrights, domain names)' },
+    { id: 'ip2', title: 'Patent registrations and applications (including international)' },
+    { id: 'ip3', title: 'Trademark registrations and applications' },
+    { id: 'ip4', title: 'Material IP licenses (in-bound and out-bound)' },
+    { id: 'ip5', title: 'Evidence of Track Record — performance reports, audited returns, portfolio summaries' },
+    { id: 'ip6', title: 'Track Record verification / third-party attestation documentation' },
+    { id: 'ip7', title: 'Evidence that IP is free and clear of any liens or encumbrances' }
+  ]},
+  { id: 'financial', label: 'Financial Statements', color: '#f59e0b', items: [
+    { id: 'fs1', title: 'Audited financial statements — most recent 3 fiscal years' },
+    { id: 'fs2', title: 'Unaudited financial statements — most recent interim period' },
+    { id: 'fs3', title: 'Auditor reports and management letters' },
+    { id: 'fs4', title: 'Auditor independence confirmation' },
+    { id: 'fs5', title: 'Management accounts — monthly / quarterly for current fiscal year' },
+    { id: 'fs6', title: 'Board-approved budgets and forecasts' },
+    { id: 'fs7', title: 'Breakdown of revenue by product / service / customer (historic)' },
+    { id: 'fs8', title: 'Summary of any off-balance-sheet items, contingent liabilities, or guarantees' }
+  ]},
+  { id: 'capstructure', label: 'Capitalization', color: '#0891b2', items: [
+    { id: 'cs1', title: 'Detailed cap table — all common equity holders with % ownership' },
+    { id: 'cs2', title: 'Preferred equity schedule — series, terms, liquidation preferences' },
+    { id: 'cs3', title: 'Option / warrant schedule (issued, outstanding, exercise price, vesting)' },
+    { id: 'cs4', title: 'Convertible notes / SAFEs — all outstanding instruments with terms' },
+    { id: 'cs5', title: 'Any equity incentive plan documents (EIP / ESOP)' },
+    { id: 'cs6', title: 'Details of any dilutive securities not captured above' },
+    { id: 'cs7', title: 'Bank account details and authorized signatories schedule' }
+  ]},
+  { id: 'tax', label: 'Tax', color: '#d97706', items: [
+    { id: 'tx1',  title: 'Federal income tax returns — most recent 3 fiscal years (all entities)' },
+    { id: 'tx2',  title: 'State and local income / franchise tax returns — most recent 3 fiscal years' },
+    { id: 'tx3',  title: 'Any open tax examinations, audits, or inquiries' },
+    { id: 'tx4',  title: 'Tax sharing, tax allocation, or tax indemnification agreements' },
+    { id: 'tx5',  title: 'Schedule of net operating losses (NOLs) and other tax attributes' },
+    { id: 'tx6',  title: 'Transfer pricing documentation (if applicable)' },
+    { id: 'tx7',  title: 'Sales & use tax compliance summary' },
+    { id: 'tx8',  title: 'Payroll tax filings — most recent 2 years' },
+    { id: 'tx9',  title: 'Any tax elections made (S-Corp, QEF, mark-to-market, etc.)' },
+    { id: 'tx10', title: 'Foreign tax filings and FBAR / FATCA compliance (if applicable)' }
+  ]}
 ];
-
-// Initialize checklist state with defaults
 SECTIONS.forEach(section => {
   state.checklist[section.id] = {};
-  section.items.forEach(item => {
-    state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' };
-  });
+  section.items.forEach(item => { state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' }; });
 });
-
-// ─── Navigation ──────────────────────────────────────────────────────────────
+// ─── Navigation ───────────────────────────────────────────────────────────────
 function goToScreen(screen) {
   if (screen !== 'setup' && !state.companyName) return;
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -770,251 +674,133 @@ function goToScreen(screen) {
   if (screen === 'checklist') renderChecklist();
   if (screen === 'report') renderReportSummary();
 }
-
-// ─── Setup ───────────────────────────────────────────────────────────────────
+// ─── Setup ────────────────────────────────────────────────────────────────────
 function startEngagement() {
   const companyName = document.getElementById('companyName').value.trim();
   const dealValue = document.getElementById('dealValue').value.trim();
   const analystName = document.getElementById('analystName').value.trim();
   const engagementDate = document.getElementById('engagementDate').value;
   const errEl = document.getElementById('setupError');
-
   if (!companyName || !dealValue || !analystName) {
     errEl.textContent = 'Please complete all required fields before proceeding.';
-    errEl.style.display = 'block';
-    return;
+    errEl.style.display = 'block'; return;
   }
   errEl.style.display = 'none';
-
-  // Reset checklist state for new deal
   state.dealId = null;
   SECTIONS.forEach(section => {
     state.checklist[section.id] = {};
-    section.items.forEach(item => {
-      state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' };
-    });
+    section.items.forEach(item => { state.checklist[section.id][item.id] = { docReceived: false, status: 'Not Started', risk: 'Low', notes: '' }; });
   });
-
-  state.companyName = companyName;
-  state.dealValue = dealValue;
-  state.analystName = analystName;
+  state.companyName = companyName; state.dealValue = dealValue; state.analystName = analystName;
   state.engagementDate = engagementDate || new Date().toISOString().split('T')[0];
-
-  document.getElementById('headerMeta').innerHTML =
-    `<div><span>${companyName}</span></div><div>Deal Value: <span>${dealValue}</span></div><div>Analyst: <span>${analystName}</span></div>`;
-
-  // Persist immediately
+  document.getElementById('headerMeta').innerHTML = `<div><span>${companyName}</span></div><div>Deal Value: <span>${dealValue}</span></div><div>Analyst: <span>${analystName}</span></div>`;
   saveDeal();
   goToScreen('checklist');
 }
-
 // ─── Stats ────────────────────────────────────────────────────────────────────
 function getSectionStats(sectionId) {
   const vals = Object.values(state.checklist[sectionId]);
-  return {
-    total: vals.length,
-    docsReceived: vals.filter(v => v.docReceived).length,
-    complete: vals.filter(v => v.status === 'Complete').length,
-    inProgress: vals.filter(v => v.status === 'In Progress').length,
-    flagged: vals.filter(v => v.status === 'Flag').length,
-    highRisk: vals.filter(v => v.risk === 'High').length,
-  };
+  return { total: vals.length, docsReceived: vals.filter(v => v.docReceived).length, complete: vals.filter(v => v.status === 'Complete').length, inProgress: vals.filter(v => v.status === 'In Progress').length, flagged: vals.filter(v => v.status === 'Flag').length, highRisk: vals.filter(v => v.risk === 'High').length };
 }
-
 function getAllStats() {
   let total = 0, docsReceived = 0, complete = 0, inProgress = 0, flagged = 0, highRisk = 0;
-  SECTIONS.forEach(s => {
-    const st = getSectionStats(s.id);
-    total += st.total; docsReceived += st.docsReceived; complete += st.complete;
-    inProgress += st.inProgress; flagged += st.flagged; highRisk += st.highRisk;
-  });
+  SECTIONS.forEach(s => { const st = getSectionStats(s.id); total += st.total; docsReceived += st.docsReceived; complete += st.complete; inProgress += st.inProgress; flagged += st.flagged; highRisk += st.highRisk; });
   return { total, docsReceived, complete, inProgress, flagged, highRisk };
 }
-
 // ─── Checklist Render ─────────────────────────────────────────────────────────
 function renderProgressRow() {
   const st = getAllStats();
   const docPct = Math.round((st.docsReceived / st.total) * 100);
   const reviewPct = Math.round((st.complete / st.total) * 100);
   document.getElementById('progressRow').innerHTML = `
-    <div class="progress-item">
-      <div class="progress-item-label">Docs Received</div>
-      <div class="progress-item-value teal">${docPct}%</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-item-label">Received / Total</div>
-      <div class="progress-item-value teal">${st.docsReceived}<span style="font-size:14px;color:#9aa5b4;font-weight:400"> / ${st.total}</span></div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-item-label">Review Complete</div>
-      <div class="progress-item-value green">${st.complete}</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${reviewPct}%;background:#059669"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-item-label">In Progress</div>
-      <div class="progress-item-value orange">${st.inProgress}</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.inProgress/st.total*100).toFixed(0)}%;background:#d97706"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-item-label">Flagged</div>
-      <div class="progress-item-value red">${st.flagged}</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.flagged/st.total*100).toFixed(0)}%;background:#dc2626"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-item-label">High Risk</div>
-      <div class="progress-item-value red">${st.highRisk}</div>
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.highRisk/st.total*100).toFixed(0)}%;background:#dc2626"></div></div>
-    </div>
-  `;
+    <div class="progress-item"><div class="progress-item-label">Docs Received</div><div class="progress-item-value teal">${docPct}%</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">Received / Total</div><div class="progress-item-value teal">${st.docsReceived}<span style="font-size:14px;color:#9aa5b4;font-weight:400"> / ${st.total}</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${docPct}%;background:#0891b2"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">Review Complete</div><div class="progress-item-value green">${st.complete}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${reviewPct}%;background:#059669"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">In Progress</div><div class="progress-item-value orange">${st.inProgress}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.inProgress/st.total*100).toFixed(0)}%;background:#d97706"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">Flagged</div><div class="progress-item-value red">${st.flagged}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.flagged/st.total*100).toFixed(0)}%;background:#dc2626"></div></div></div>
+    <div class="progress-item"><div class="progress-item-label">High Risk</div><div class="progress-item-value red">${st.highRisk}</div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${(st.highRisk/st.total*100).toFixed(0)}%;background:#dc2626"></div></div></div>`;
 }
-
 function renderTabs() {
   document.getElementById('tabBar').innerHTML = SECTIONS.map(s => {
     const st = getSectionStats(s.id);
     const pct = Math.round((st.docsReceived / st.total) * 100);
-    return `<div class="tab ${state.activeTab === s.id ? 'active' : ''}" onclick="switchTab('${s.id}')">
-      ${s.label} <span class="tab-badge">${pct}%</span>
-    </div>`;
+    return `<div class="tab ${state.activeTab === s.id ? 'active' : ''}" onclick="switchTab('${s.id}')">${s.label} <span class="tab-badge">${pct}%</span></div>`;
   }).join('');
 }
-
 function renderTabContent() {
   const section = SECTIONS.find(s => s.id === state.activeTab);
   document.getElementById('tabContent').innerHTML = `
     <table class="checklist-table" style="min-width:870px;">
-      <thead>
-        <tr>
-          <th style="width:28px;">#</th>
-          <th>Document</th>
-          <th class="center" style="width:90px;">Doc Received</th>
-          <th style="width:138px;">Review Status</th>
-          <th style="width:90px;">Risk Level</th>
-          <th style="width:200px;">Notes</th>
-          <th class="center" style="width:110px;">AI Analysis</th>
-        </tr>
-      </thead>
+      <thead><tr>
+        <th style="width:28px;">#</th><th>Document</th>
+        <th class="center" style="width:90px;">Doc Received</th>
+        <th style="width:138px;">Review Status</th>
+        <th style="width:90px;">Risk Level</th>
+        <th style="width:200px;">Notes</th>
+        <th class="center" style="width:110px;">AI Analysis</th>
+      </tr></thead>
       <tbody>
         ${section.items.map((item, i) => {
           const data = state.checklist[state.activeTab][item.id];
-          const analyzed = data._analyzed;
           return `<tr>
             <td class="item-num">${i + 1}</td>
             <td class="item-title">${item.title}</td>
-            <td class="doc-check-cell">
-              <div class="doc-check-wrap">
-                <input type="checkbox" class="doc-check" ${data.docReceived ? 'checked' : ''}
-                  onchange="updateItem('${state.activeTab}','${item.id}','docReceived',this.checked,this)">
-                <span class="${data.docReceived ? 'doc-status-yes' : 'doc-status-no'}">${data.docReceived ? 'Received' : 'Missing'}</span>
-              </div>
-            </td>
-            <td>
-              <select class="status-select status-${data.status.toLowerCase().replace(/ /g,'-')}"
-                onchange="updateItem('${state.activeTab}','${item.id}','status',this.value,this)">
-                <option ${data.status==='Not Started'?'selected':''}>Not Started</option>
-                <option ${data.status==='In Progress'?'selected':''}>In Progress</option>
-                <option ${data.status==='Complete'?'selected':''}>Complete</option>
-                <option ${data.status==='Flag'?'selected':''}>Flag</option>
-              </select>
-            </td>
-            <td>
-              <select class="risk-select risk-${data.risk.toLowerCase()}"
-                onchange="updateItem('${state.activeTab}','${item.id}','risk',this.value,this)">
-                <option ${data.risk==='Low'?'selected':''}>Low</option>
-                <option ${data.risk==='Medium'?'selected':''}>Medium</option>
-                <option ${data.risk==='High'?'selected':''}>High</option>
-              </select>
-            </td>
-            <td>
-              <textarea class="notes-input" placeholder="Add notes..."
-                onchange="updateItem('${state.activeTab}','${item.id}','notes',this.value,this)">${data.notes}</textarea>
-            </td>
-            <td style="text-align:center; padding:8px;">
-              <button class="upload-btn ${analyzed ? 'done' : ''}" id="upload-btn-${item.id}"
-                onclick="triggerDocUpload('${state.activeTab}','${item.id}')">
-                ${analyzed ? 'Re-analyze' : 'Upload & Analyze'}
+            <td class="doc-check-cell"><div class="doc-check-wrap">
+              <input type="checkbox" class="doc-check" ${data.docReceived ? 'checked' : ''} onchange="updateItem('${state.activeTab}','${item.id}','docReceived',this.checked,this)">
+              <span class="${data.docReceived ? 'doc-status-yes' : 'doc-status-no'}">${data.docReceived ? 'Received' : 'Missing'}</span>
+            </div></td>
+            <td><select class="status-select status-${data.status.toLowerCase().replace(/ /g,'-')}" onchange="updateItem('${state.activeTab}','${item.id}','status',this.value,this)">
+              <option ${data.status==='Not Started'?'selected':''}>Not Started</option>
+              <option ${data.status==='In Progress'?'selected':''}>In Progress</option>
+              <option ${data.status==='Complete'?'selected':''}>Complete</option>
+              <option ${data.status==='Flag'?'selected':''}>Flag</option>
+            </select></td>
+            <td><select class="risk-select risk-${data.risk.toLowerCase()}" onchange="updateItem('${state.activeTab}','${item.id}','risk',this.value,this)">
+              <option ${data.risk==='Low'?'selected':''}>Low</option>
+              <option ${data.risk==='Medium'?'selected':''}>Medium</option>
+              <option ${data.risk==='High'?'selected':''}>High</option>
+            </select></td>
+            <td><textarea class="notes-input" placeholder="Add notes..." onchange="updateItem('${state.activeTab}','${item.id}','notes',this.value,this)">${data.notes}</textarea></td>
+            <td style="text-align:center;padding:8px;">
+              <button class="upload-btn ${data._analyzed ? 'done' : ''}" id="upload-btn-${item.id}" onclick="triggerDocUpload('${state.activeTab}','${item.id}')">
+                ${data._analyzed ? 'Re-analyze' : 'Upload & Analyze'}
               </button>
             </td>
           </tr>`;
         }).join('')}
       </tbody>
-    </table>
-  `;
+    </table>`;
 }
-
 function renderChecklist() {
   document.getElementById('checklistHeading').textContent = `Document Checklist — ${state.companyName}`;
   document.getElementById('checklistSubheading').textContent = `Deal Value: ${state.dealValue} · Analyst: ${state.analystName} · ${state.engagementDate}`;
-  renderProgressRow();
-  renderTabs();
-  renderTabContent();
+  renderProgressRow(); renderTabs(); renderTabContent();
 }
-
-function switchTab(id) {
-  state.activeTab = id;
-  renderTabs();
-  renderTabContent();
-}
-
+function switchTab(id) { state.activeTab = id; renderTabs(); renderTabContent(); }
 function updateItem(sectionId, itemId, field, value, el) {
   state.checklist[sectionId][itemId][field] = value;
-  if (field === 'status') {
-    el.className = 'status-select status-' + value.toLowerCase().replace(/ /g,'-');
-  }
-  if (field === 'risk') {
-    el.className = 'risk-select risk-' + value.toLowerCase();
-  }
+  if (field === 'status') el.className = 'status-select status-' + value.toLowerCase().replace(/ /g,'-');
+  if (field === 'risk') el.className = 'risk-select risk-' + value.toLowerCase();
   if (field === 'docReceived') {
     const label = el.closest('.doc-check-wrap').querySelector('span');
     label.className = value ? 'doc-status-yes' : 'doc-status-no';
     label.textContent = value ? 'Received' : 'Missing';
   }
-  renderProgressRow();
-  renderTabs();
-  queueSave();
+  renderProgressRow(); renderTabs(); queueSave();
 }
-
 // ─── Report ───────────────────────────────────────────────────────────────────
 function renderReportSummary() {
   const st = getAllStats();
   const docPct = Math.round((st.docsReceived / st.total) * 100);
-  document.getElementById('reportSubtitle').textContent =
-    `${state.companyName} · Deal Value: ${state.dealValue} · Analyst: ${state.analystName}`;
+  document.getElementById('reportSubtitle').textContent = `${state.companyName} · Deal Value: ${state.dealValue} · Analyst: ${state.analystName}`;
   document.getElementById('reportSummary').innerHTML = `
-    <div class="summary-card teal">
-      <div class="summary-card-label">Docs Received</div>
-      <div class="summary-card-value">${docPct}%</div>
-      <div class="summary-card-sub">${st.docsReceived} of ${st.total} documents</div>
-    </div>
-    <div class="summary-card">
-      <div class="summary-card-label">Missing Documents</div>
-      <div class="summary-card-value">${st.total - st.docsReceived}</div>
-      <div class="summary-card-sub">Not yet received</div>
-    </div>
-    <div class="summary-card green">
-      <div class="summary-card-label">Review Complete</div>
-      <div class="summary-card-value">${st.complete}</div>
-      <div class="summary-card-sub">Items fully reviewed</div>
-    </div>
-    <div class="summary-card orange">
-      <div class="summary-card-label">In Progress</div>
-      <div class="summary-card-value">${st.inProgress}</div>
-      <div class="summary-card-sub">Under active review</div>
-    </div>
-    <div class="summary-card red">
-      <div class="summary-card-label">Flagged</div>
-      <div class="summary-card-value">${st.flagged}</div>
-      <div class="summary-card-sub">Require attention</div>
-    </div>
-    <div class="summary-card red">
-      <div class="summary-card-label">High Risk</div>
-      <div class="summary-card-value">${st.highRisk}</div>
-      <div class="summary-card-sub">Elevated risk exposure</div>
-    </div>
-  `;
+    <div class="summary-card teal"><div class="summary-card-label">Docs Received</div><div class="summary-card-value">${docPct}%</div><div class="summary-card-sub">${st.docsReceived} of ${st.total} documents</div></div>
+    <div class="summary-card"><div class="summary-card-label">Missing Documents</div><div class="summary-card-value">${st.total - st.docsReceived}</div><div class="summary-card-sub">Not yet received</div></div>
+    <div class="summary-card green"><div class="summary-card-label">Review Complete</div><div class="summary-card-value">${st.complete}</div><div class="summary-card-sub">Items fully reviewed</div></div>
+    <div class="summary-card orange"><div class="summary-card-label">In Progress</div><div class="summary-card-value">${st.inProgress}</div><div class="summary-card-sub">Under active review</div></div>
+    <div class="summary-card red"><div class="summary-card-label">Flagged</div><div class="summary-card-value">${st.flagged}</div><div class="summary-card-sub">Require attention</div></div>
+    <div class="summary-card red"><div class="summary-card-label">High Risk</div><div class="summary-card-value">${st.highRisk}</div><div class="summary-card-sub">Elevated risk exposure</div></div>`;
 }
-
 function buildPrompt() {
   const lines = [];
   lines.push(`You are a senior M&A due diligence analyst. Generate a comprehensive, professional due diligence report for the following acquisition target.`);
@@ -1023,109 +809,49 @@ function buildPrompt() {
   lines.push(`- Deal Value: ${state.dealValue}`);
   lines.push(`- Lead Analyst: ${state.analystName}`);
   lines.push(`- Date: ${state.engagementDate}`);
-
   const missingDocs = [];
-  SECTIONS.forEach(section => {
-    section.items.forEach(item => {
-      if (!state.checklist[section.id][item.id].docReceived)
-        missingDocs.push(`[${section.label}] ${item.title}`);
-    });
-  });
-
+  SECTIONS.forEach(section => { section.items.forEach(item => { if (!state.checklist[section.id][item.id].docReceived) missingDocs.push(`[${section.label}] ${item.title}`); }); });
   const st = getAllStats();
   lines.push(`\n**DOCUMENT COLLECTION STATUS**`);
   lines.push(`- Total Documents Requested: ${st.total}`);
   lines.push(`- Documents Received: ${st.docsReceived} (${Math.round(st.docsReceived/st.total*100)}%)`);
   lines.push(`- Documents Not Yet Received: ${st.total - st.docsReceived}`);
-
-  if (missingDocs.length > 0) {
-    lines.push(`\n**OUTSTANDING / MISSING DOCUMENTS (${missingDocs.length})**`);
-    missingDocs.forEach(d => lines.push(`- ${d}`));
-  }
-
+  if (missingDocs.length > 0) { lines.push(`\n**OUTSTANDING / MISSING DOCUMENTS (${missingDocs.length})**`); missingDocs.forEach(d => lines.push(`- ${d}`)); }
   lines.push(`\n**DUE DILIGENCE FINDINGS BY SECTION**\n`);
   SECTIONS.forEach(section => {
     lines.push(`\n## ${section.label.toUpperCase()}`);
     section.items.forEach(item => {
       const data = state.checklist[section.id][item.id];
-      const docStatus = data.docReceived ? 'Received' : 'NOT RECEIVED';
-      lines.push(`- **${item.title}**: Doc: ${docStatus} | Review: ${data.status} | Risk: ${data.risk}${data.notes ? ` | Notes: ${data.notes}` : ''}`);
+      lines.push(`- **${item.title}**: Doc: ${data.docReceived ? 'Received' : 'NOT RECEIVED'} | Review: ${data.status} | Risk: ${data.risk}${data.notes ? ` | Notes: ${data.notes}` : ''}`);
     });
   });
-
   lines.push(`\n**REPORT REQUIREMENTS**`);
   lines.push(`Generate a full professional M&A due diligence report with the following sections:`);
-  lines.push(`1. Executive Summary (deal overview, overall recommendation, document collection rate, key metrics)`);
-  lines.push(`2. Document Collection Status & Gaps (detailed list of missing documents, impact on diligence completeness, recommended urgency for each outstanding item)`);
-  lines.push(`3. Key Findings & Red Flags (prioritized by risk — focus on Flagged, High Risk, and items where documents were NOT received)`);
-  lines.push(`4. Corporate & Entity Structure Analysis`);
-  lines.push(`5. Legal Analysis (contracts, litigation, IP & track record)`);
-  lines.push(`6. Financial Statements Analysis`);
-  lines.push(`7. Capitalization Structure Analysis`);
-  lines.push(`8. Tax Due Diligence Analysis`);
-  lines.push(`9. Risk Summary Matrix (table of top risks by category with severity — including document gaps as a risk category)`);
-  lines.push(`10. Deal Structuring Recommendations (price adjustments, rep & warranty insurance, escrow, document delivery conditions precedent)`);
-  lines.push(`11. Outstanding Items & Conditions Precedent (documents that must be received before closing, items requiring further analysis)`);
-  lines.push(`\nIMPORTANT: For every section, explicitly call out whether key documents were received or are still outstanding. Documents marked "NOT RECEIVED" represent diligence gaps that must be highlighted. For items marked "Flag" or "High Risk", provide detailed analysis and specific recommendations. Use professional M&A and investment banking language. Format with clear headers and bullet points.`);
-
+  lines.push(`1. Executive Summary\n2. Document Collection Status & Gaps\n3. Key Findings & Red Flags\n4. Corporate & Entity Structure Analysis\n5. Legal Analysis\n6. Financial Statements Analysis\n7. Capitalization Structure Analysis\n8. Tax Due Diligence Analysis\n9. Risk Summary Matrix\n10. Deal Structuring Recommendations\n11. Outstanding Items & Conditions Precedent`);
+  lines.push(`\nFor every section, explicitly call out whether key documents were received or are still outstanding. For items marked "Flag" or "High Risk", provide detailed analysis. Use professional M&A language.`);
   return lines.join('\n');
 }
-
-let isStreaming = false;
-let fullReportText = '';
-
+let isStreaming = false, fullReportText = '';
 async function generateReport() {
   if (isStreaming) return;
-  isStreaming = true;
-  fullReportText = '';
-
-  const generateBtn = document.getElementById('generateBtn');
-  const copyBtn = document.getElementById('copyBtn');
-  const pdfBtn = document.getElementById('pdfBtn');
-  const reportOutput = document.getElementById('reportOutput');
-  const generateCta = document.getElementById('generateCta');
-  const streamStatus = document.getElementById('streamStatus');
-  const reportContent = document.getElementById('reportContent');
-  const reportError = document.getElementById('reportError');
-
-  generateBtn.disabled = true;
-  generateBtn.textContent = 'Generating...';
-  copyBtn.style.display = 'none';
-  pdfBtn.style.display = 'none';
-  generateCta.style.display = 'none';
-  reportError.style.display = 'none';
-  reportContent.innerHTML = '';
-  reportOutput.classList.add('streaming');
-  streamStatus.style.display = 'flex';
-
+  isStreaming = true; fullReportText = '';
+  const generateBtn = document.getElementById('generateBtn'), copyBtn = document.getElementById('copyBtn'), pdfBtn = document.getElementById('pdfBtn');
+  const reportOutput = document.getElementById('reportOutput'), generateCta = document.getElementById('generateCta');
+  const streamStatus = document.getElementById('streamStatus'), reportContent = document.getElementById('reportContent'), reportError = document.getElementById('reportError');
+  generateBtn.disabled = true; generateBtn.textContent = 'Generating...';
+  copyBtn.style.display = 'none'; pdfBtn.style.display = 'none'; generateCta.style.display = 'none';
+  reportError.style.display = 'none'; reportContent.innerHTML = ''; reportOutput.classList.add('streaming'); streamStatus.style.display = 'flex';
   try {
-    const response = await fetch('/api/proxy', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 8000,
-        stream: true,
-        messages: [{ role: 'user', content: buildPrompt() }]
-      })
-    });
-
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({ error: { message: `HTTP ${response.status}` } }));
-      throw new Error(err.error?.message || `HTTP ${response.status}`);
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
+    const response = await fetch('/api/proxy', { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 8000, stream: true, messages: [{ role: 'user', content: buildPrompt() }] }) });
+    if (!response.ok) { const err = await response.json().catch(() => ({})); throw new Error(err.error?.message || `HTTP ${response.status}`); }
+    const reader = response.body.getReader(), decoder = new TextDecoder();
     let buffer = '';
-
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop();
-
+      const lines = buffer.split('\n'); buffer = lines.pop();
       for (const line of lines) {
         if (line.startsWith('data: ')) {
           const data = line.slice(6).trim();
@@ -1141,194 +867,103 @@ async function generateReport() {
         }
       }
     }
-
     reportContent.innerHTML = renderMarkdown(fullReportText);
-    streamStatus.style.display = 'none';
-    reportOutput.classList.remove('streaming');
-    copyBtn.style.display = 'inline-flex';
-    pdfBtn.style.display = 'inline-flex';
-    generateBtn.textContent = 'Regenerate Report';
-
+    streamStatus.style.display = 'none'; reportOutput.classList.remove('streaming');
+    copyBtn.style.display = 'inline-flex'; pdfBtn.style.display = 'inline-flex'; generateBtn.textContent = 'Regenerate Report';
   } catch (err) {
-    streamStatus.style.display = 'none';
-    reportOutput.classList.remove('streaming');
-    reportError.textContent = `Error: ${err.message}. Please try again.`;
-    reportError.style.display = 'block';
-    generateCta.style.display = 'block';
-    generateBtn.textContent = 'Generate Report';
-  } finally {
-    isStreaming = false;
-    generateBtn.disabled = false;
-  }
+    streamStatus.style.display = 'none'; reportOutput.classList.remove('streaming');
+    reportError.textContent = `Error: ${err.message}. Please try again.`; reportError.style.display = 'block';
+    generateCta.style.display = 'block'; generateBtn.textContent = 'Generate Report';
+  } finally { isStreaming = false; generateBtn.disabled = false; }
 }
-
 function renderMarkdown(text) {
   return text
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
-    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(?!<[hul]|<li|<\/)(.*\S.*)$/gm, '$1')
-    .replace(/\|(.+)\|/g, m => {
-      const cells = m.split('|').filter(c => c.trim());
-      return '<tr>' + cells.map(c => `<td style="padding:6px 12px;border:1px solid #e8ecf0;">${c.trim()}</td>`).join('') + '</tr>';
-    });
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^# (.+)$/gm,'<h1>$1</h1>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g,m=>`<ul>${m}</ul>`)
+    .replace(/^\d+\. (.+)$/gm,'<li>$1</li>').replace(/\n\n/g,'</p><p>')
+    .replace(/^(?!<[hul]|<li|<\/)(.*\S.*)$/gm,'$1')
+    .replace(/\|(.+)\|/g,m=>{const cells=m.split('|').filter(c=>c.trim());return '<tr>'+cells.map(c=>`<td style="padding:6px 12px;border:1px solid #e8ecf0;">${c.trim()}</td>`).join('')+'</tr>';});
 }
-
 function exportToPDF() {
   if (!fullReportText) return;
-  const btn = document.getElementById('pdfBtn');
-  btn.textContent = 'Generating PDF...';
-  btn.disabled = true;
-
+  const btn = document.getElementById('pdfBtn'); btn.textContent = 'Generating PDF...'; btn.disabled = true;
   const container = document.createElement('div');
   container.style.cssText = 'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#1a1a2e;padding:0;';
-  container.innerHTML = `
-    <div style="background:#0d1b2a;color:#fff;padding:24px 32px;">
-      <div style="font-size:20px;font-weight:800;">DealScope</div>
-      <div style="font-size:11px;color:#7a9abf;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">M&A Due Diligence Report</div>
-    </div>
+  container.innerHTML = `<div style="background:#0d1b2a;color:#fff;padding:24px 32px;"><div style="font-size:20px;font-weight:800;">DealScope</div><div style="font-size:11px;color:#7a9abf;letter-spacing:1px;text-transform:uppercase;margin-top:2px;">M&A Due Diligence Report</div></div>
     <div style="background:#162032;color:#a8c4e0;padding:12px 32px;font-size:12px;display:flex;gap:32px;flex-wrap:wrap;margin-bottom:32px;">
-      <span><strong style="color:#fff;">Target:</strong> ${state.companyName}</span>
-      <span><strong style="color:#fff;">Deal Value:</strong> ${state.dealValue}</span>
-      <span><strong style="color:#fff;">Analyst:</strong> ${state.analystName}</span>
-      <span><strong style="color:#fff;">Date:</strong> ${state.engagementDate}</span>
-    </div>
-    <div style="padding:0 32px 40px;font-size:13.5px;line-height:1.8;color:#2d3748;">
-      ${document.getElementById('reportContent').innerHTML}
-    </div>`;
-
-  container.querySelectorAll('h1').forEach(el => Object.assign(el.style, { fontSize:'20px', fontWeight:'800', color:'#0d1b2a', margin:'0 0 8px' }));
-  container.querySelectorAll('h2').forEach(el => Object.assign(el.style, { fontSize:'15px', fontWeight:'700', color:'#0d1b2a', margin:'24px 0 8px', borderBottom:'2px solid #e8ecf0', paddingBottom:'5px' }));
-  container.querySelectorAll('h3').forEach(el => Object.assign(el.style, { fontSize:'13px', fontWeight:'700', color:'#2d3748', margin:'16px 0 6px' }));
-  container.querySelectorAll('ul').forEach(el => Object.assign(el.style, { margin:'6px 0 10px 18px' }));
-  container.querySelectorAll('strong').forEach(el => Object.assign(el.style, { color:'#0d1b2a' }));
-
+      <span><strong style="color:#fff;">Target:</strong> ${state.companyName}</span><span><strong style="color:#fff;">Deal Value:</strong> ${state.dealValue}</span>
+      <span><strong style="color:#fff;">Analyst:</strong> ${state.analystName}</span><span><strong style="color:#fff;">Date:</strong> ${state.engagementDate}</span></div>
+    <div style="padding:0 32px 40px;font-size:13.5px;line-height:1.8;color:#2d3748;">${document.getElementById('reportContent').innerHTML}</div>`;
+  container.querySelectorAll('h1').forEach(el => Object.assign(el.style,{fontSize:'20px',fontWeight:'800',color:'#0d1b2a',margin:'0 0 8px'}));
+  container.querySelectorAll('h2').forEach(el => Object.assign(el.style,{fontSize:'15px',fontWeight:'700',color:'#0d1b2a',margin:'24px 0 8px',borderBottom:'2px solid #e8ecf0',paddingBottom:'5px'}));
+  container.querySelectorAll('h3').forEach(el => Object.assign(el.style,{fontSize:'13px',fontWeight:'700',color:'#2d3748',margin:'16px 0 6px'}));
+  container.querySelectorAll('ul').forEach(el => Object.assign(el.style,{margin:'6px 0 10px 18px'}));
+  container.querySelectorAll('strong').forEach(el => Object.assign(el.style,{color:'#0d1b2a'}));
   const filename = `DD-Report-${state.companyName.replace(/[^a-z0-9]/gi,'_')}-${state.engagementDate}.pdf`;
-  html2pdf().set({
-    margin: 0, filename,
-    image: { type: 'jpeg', quality: 0.97 },
-    html2canvas: { scale: 2, useCORS: true, logging: false },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  }).from(container).save().then(() => {
-    btn.textContent = 'Export PDF';
-    btn.disabled = false;
-  }).catch(() => {
-    btn.textContent = 'Export PDF';
-    btn.disabled = false;
-  });
+  html2pdf().set({ margin:0, filename, image:{type:'jpeg',quality:0.97}, html2canvas:{scale:2,useCORS:true,logging:false}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['avoid-all','css','legacy']} })
+    .from(container).save().then(() => { btn.textContent='Export PDF'; btn.disabled=false; }).catch(() => { btn.textContent='Export PDF'; btn.disabled=false; });
 }
-
 function copyReport() {
   if (!fullReportText) return;
-  navigator.clipboard.writeText(fullReportText).then(() => {
-    const btn = document.getElementById('copyBtn');
-    const orig = btn.textContent;
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = orig, 2000);
-  });
+  navigator.clipboard.writeText(fullReportText).then(() => { const btn = document.getElementById('copyBtn'); const orig = btn.textContent; btn.textContent='Copied!'; setTimeout(()=>btn.textContent=orig,2000); });
 }
-
-// ─── Document Analysis ────────────────────────────────────────────────────────
+// ─── Single Document Upload & Analyze ────────────────────────────────────────
 function triggerDocUpload(sectionId, itemId) {
   const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'application/pdf,.xlsx,.xls';
-  input.onchange = e => {
-    const file = e.target.files[0];
-    if (file) handleDocUpload(file, sectionId, itemId);
-  };
+  input.type = 'file'; input.accept = 'application/pdf,.xlsx,.xls';
+  input.onchange = e => { const file = e.target.files[0]; if (file) handleDocUpload(file, sectionId, itemId); };
   input.click();
 }
-
 function handleDocUpload(file, sectionId, itemId) {
   const ext = file.name.split('.').pop().toLowerCase();
   const isPdf = file.type === 'application/pdf' || ext === 'pdf';
   const isExcel = ext === 'xlsx' || ext === 'xls';
-
-  if (!isPdf && !isExcel) {
-    alert('Only PDF and Excel files (.pdf, .xlsx, .xls) are supported.');
-    return;
-  }
-  if (file.size > 32 * 1024 * 1024) {
-    alert('File is too large (max 32 MB). Please upload a smaller file.');
-    return;
-  }
-
+  if (!isPdf && !isExcel) { alert('Only PDF and Excel files (.pdf, .xlsx, .xls) are supported.'); return; }
+  if (file.size > 32 * 1024 * 1024) { alert('File is too large (max 32 MB).'); return; }
   const btn = document.getElementById('upload-btn-' + itemId);
   if (btn) { btn.textContent = 'Analyzing…'; btn.disabled = true; btn.classList.add('analyzing'); btn.classList.remove('done'); }
-
   const section = SECTIONS.find(s => s.id === sectionId);
   const item = section?.items.find(i => i.id === itemId);
   const reader = new FileReader();
-
   if (isPdf) {
     reader.onload = async e => {
-      const base64 = e.target.result.split(',')[1];
-      try {
-        await analyzeDocumentWithClaude(base64, 'pdf', item.title, sectionId, itemId);
-      } catch (err) {
-        showAnalysisToast('error', item ? item.title : itemId, null, err.message);
-        if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
-      }
-    };
-    reader.onerror = () => {
-      alert('Could not read the file. Please try again.');
-      if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
+      try { await analyzeDocumentWithClaude(e.target.result.split(',')[1], 'pdf', item.title, sectionId, itemId); }
+      catch (err) { showAnalysisToast('error', item ? item.title : itemId, null, err.message); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } }
     };
     reader.readAsDataURL(file);
   } else {
-    // Excel: read as ArrayBuffer and convert to text via SheetJS
     reader.onload = async e => {
       try {
-        const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
-        const sheetText = excelWorkbookToText(workbook, file.name);
-        await analyzeDocumentWithClaude(sheetText, 'excel', item.title, sectionId, itemId);
-      } catch (err) {
-        showAnalysisToast('error', item ? item.title : itemId, null, err.message);
-        if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
-      }
-    };
-    reader.onerror = () => {
-      alert('Could not read the file. Please try again.');
-      if (btn) { btn.textContent = 'Upload & Analyze'; btn.disabled = false; btn.classList.remove('analyzing'); }
+        const wb = XLSX.read(new Uint8Array(e.target.result), { type:'array', cellDates:true });
+        await analyzeDocumentWithClaude(excelWorkbookToText(wb, file.name), 'excel', item.title, sectionId, itemId);
+      } catch (err) { showAnalysisToast('error', item ? item.title : itemId, null, err.message); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } }
     };
     reader.readAsArrayBuffer(file);
   }
+  reader.onerror = () => { alert('Could not read the file.'); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } };
 }
-
 function excelWorkbookToText(workbook, filename) {
   const parts = [`Excel file: ${filename}\n`];
   for (const sheetName of workbook.SheetNames) {
     const sheet = workbook.Sheets[sheetName];
-    const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+    const rows = XLSX.utils.sheet_to_json(sheet, { header:1, defval:'' });
     const nonEmpty = rows.filter(r => r.some(c => c !== ''));
     if (!nonEmpty.length) continue;
     parts.push(`\n--- Sheet: ${sheetName} ---`);
-    const header = nonEmpty[0].map(h => String(h ?? '').trim());
+    const header = nonEmpty[0].map(h => String(h??'').trim());
     parts.push('| ' + header.join(' | ') + ' |');
-    parts.push('| ' + header.map(() => '---').join(' | ') + ' |');
-    for (const row of nonEmpty.slice(1, 501)) {
-      parts.push('| ' + row.map(c => String(c ?? '').replace(/\|/g, '\\|').trim()).join(' | ') + ' |');
-    }
+    parts.push('| ' + header.map(()=>'---').join(' | ') + ' |');
+    for (const row of nonEmpty.slice(1, 501)) parts.push('| ' + row.map(c => String(c??'').replace(/\|/g,'\\|').trim()).join(' | ') + ' |');
     if (nonEmpty.length > 501) parts.push(`*(${nonEmpty.length - 501} more rows not shown)*`);
   }
   return parts.join('\n');
 }
-
 async function analyzeDocumentWithClaude(content, fileType, itemTitle, sectionId, itemId) {
   const prompt = `You are a senior M&A due diligence analyst reviewing a document for an acquisition.
-
 The checklist item this document is meant to satisfy is:
 "${itemTitle}"
-
 Analyze this document carefully and respond with ONLY a valid JSON object (no markdown fences, no preamble) in exactly this format:
 {
   "confirmed": true or false,
@@ -1340,113 +975,279 @@ Analyze this document carefully and respond with ONLY a valid JSON object (no ma
   "suspicious": true or false,
   "flags": ["specific concern 1", "specific concern 2"]
 }
-
 Guidelines:
 - confirmed: true if the document substantially matches what the checklist item requests
-- risk Low = standard/clean document; Medium = minor gaps or issues; High = significant problems or missing key terms
-- status Complete = document is clean and satisfies the checklist item; In Progress = partially addresses it; Flag = suspicious, high-risk, or fails to match
-- suspicious: true if you find inconsistencies, potential fraud indicators, unusual redactions, suspicious dates, missing signatures, or other red flags
-- flags array should be specific and actionable; empty array [] if none found`;
-
+- risk Low = standard/clean document; Medium = minor gaps or issues; High = significant problems
+- status Complete = document is clean and satisfies the checklist item; In Progress = partially; Flag = suspicious or high-risk
+- suspicious: true if you find inconsistencies, potential fraud, unusual redactions, suspicious dates, missing signatures
+- flags: specific and actionable; empty array [] if none`;
   const response = await fetch('/api/proxy', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    method: 'POST', headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-opus-4-6',
-      max_tokens: 1024,
-      messages: [{
-        role: 'user',
-        content: fileType === 'pdf'
-          ? [
-              { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: content } },
-              { type: 'text', text: prompt }
-            ]
-          : [
-              { type: 'text', text: `The following is the content of an Excel spreadsheet:\n\n${content}\n\n${prompt}` }
-            ]
+      model: 'claude-opus-4-6', max_tokens: 1024,
+      messages: [{ role: 'user', content: fileType === 'pdf'
+        ? [{ type:'document', source:{ type:'base64', media_type:'application/pdf', data:content } }, { type:'text', text:prompt }]
+        : [{ type:'text', text:`The following is the content of an Excel spreadsheet:\n\n${content}\n\n${prompt}` }]
       }]
     })
   });
-
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({}));
-    throw new Error(err.error?.message || 'API error ' + response.status);
-  }
-
+  if (!response.ok) { const err = await response.json().catch(()=>({})); throw new Error(err.error?.message || 'API error ' + response.status); }
   const result = await response.json();
   const rawText = (result.content?.[0]?.text || '').trim();
-
   let analysis;
-  try {
-    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-    analysis = JSON.parse(jsonMatch ? jsonMatch[0] : rawText);
-  } catch {
-    throw new Error('Could not parse the analysis response. Please try again.');
-  }
-
-  // Build notes: summary + confirmation note if document didn't match
+  try { const m = rawText.match(/\{[\s\S]*\}/); analysis = JSON.parse(m ? m[0] : rawText); }
+  catch { throw new Error('Could not parse the analysis response. Please try again.'); }
   let notesText = analysis.summary || '';
-  if (!analysis.confirmed && analysis.confirmation_note) {
-    notesText += '\n\n⚠ Document mismatch: ' + analysis.confirmation_note;
-  }
-  if (analysis.flags && analysis.flags.length > 0) {
-    notesText += '\n\nFlags: ' + analysis.flags.map(f => '• ' + f).join('\n');
-  }
-
-  // Apply results to state
+  if (!analysis.confirmed && analysis.confirmation_note) notesText += '\n\n⚠ Document mismatch: ' + analysis.confirmation_note;
+  if (analysis.flags?.length) notesText += '\n\nFlags: ' + analysis.flags.map(f => '• ' + f).join('\n');
   state.checklist[sectionId][itemId].docReceived = true;
   state.checklist[sectionId][itemId].notes = notesText;
   state.checklist[sectionId][itemId].risk = analysis.risk || 'Medium';
   state.checklist[sectionId][itemId].status = analysis.status || (analysis.suspicious ? 'Flag' : 'Complete');
   state.checklist[sectionId][itemId]._analyzed = true;
-
-  // Re-render and persist
-  renderTabContent();
-  renderProgressRow();
-  renderTabs();
-  queueSave();
-
-  // Show result
+  renderTabContent(); renderProgressRow(); renderTabs(); queueSave();
   showAnalysisToast(analysis.suspicious ? 'warning' : 'success', itemTitle, analysis);
 }
-
 function showAnalysisToast(type, itemTitle, analysis, errorMsg) {
   const toast = document.getElementById('analysisToast');
-  const iconEl = document.getElementById('analysisToastIcon');
-  const titleEl = document.getElementById('analysisToastTitle');
-  const bodyEl = document.getElementById('analysisToastBody');
-
-  const riskColor = r => r === 'High' ? '#f87171' : r === 'Medium' ? '#fbbf24' : '#6ee7b7';
+  const iconEl = document.getElementById('analysisToastIcon'), titleEl = document.getElementById('analysisToastTitle'), bodyEl = document.getElementById('analysisToastBody');
+  const riskColor = r => r==='High'?'#f87171':r==='Medium'?'#fbbf24':'#6ee7b7';
   const shortTitle = itemTitle.length > 65 ? itemTitle.substring(0, 65) + '…' : itemTitle;
-
   if (type === 'error') {
-    iconEl.textContent = '⚠';
-    titleEl.textContent = 'Analysis Failed';
-    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span>
-      <div style="color:#fca5a5;">Error: ${errorMsg || 'Unknown error. Please try again.'}</div>`;
+    iconEl.textContent = '⚠'; titleEl.textContent = 'Analysis Failed';
+    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span><div style="color:#fca5a5;">Error: ${errorMsg || 'Unknown error.'}</div>`;
   } else if (type === 'warning') {
-    iconEl.textContent = '🚩';
-    titleEl.textContent = 'Suspicious Document Detected';
-    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span>
-      <div class="analysis-toast-summary">${analysis.summary}</div>
+    iconEl.textContent = '🚩'; titleEl.textContent = 'Suspicious Document Detected';
+    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span><div class="analysis-toast-summary">${analysis.summary}</div>
       <div class="analysis-toast-meta">Risk: <strong style="color:${riskColor(analysis.risk)}">${analysis.risk}</strong> · Status set to: <strong>${analysis.status}</strong></div>
-      ${!analysis.confirmed ? `<div class="analysis-toast-warn">⚠ ${analysis.confirmation_note}</div>` : ''}
-      ${analysis.flags?.length ? `<div class="analysis-toast-flags"><div class="analysis-toast-flags-title">⚠ Suspicious flags</div>${analysis.flags.map(f => `<div class="analysis-toast-flag-item">• ${f}</div>`).join('')}</div>` : ''}`;
+      ${!analysis.confirmed?`<div class="analysis-toast-warn">⚠ ${analysis.confirmation_note}</div>`:''}
+      ${analysis.flags?.length?`<div class="analysis-toast-flags"><div class="analysis-toast-flags-title">⚠ Suspicious flags</div>${analysis.flags.map(f=>`<div class="analysis-toast-flag-item">• ${f}</div>`).join('')}</div>`:''}`;
   } else {
-    iconEl.textContent = '✓';
-    titleEl.textContent = 'Document Analyzed';
-    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span>
-      <div class="analysis-toast-summary">${analysis.summary}</div>
+    iconEl.textContent = '✓'; titleEl.textContent = 'Document Analyzed';
+    bodyEl.innerHTML = `<span class="analysis-toast-item">${shortTitle}</span><div class="analysis-toast-summary">${analysis.summary}</div>
       <div class="analysis-toast-meta">Risk: <strong style="color:${riskColor(analysis.risk)}">${analysis.risk}</strong> · Status: <strong>${analysis.status}</strong></div>
-      ${!analysis.confirmed ? `<div class="analysis-toast-warn">⚠ ${analysis.confirmation_note}</div>` : ''}`;
+      ${!analysis.confirmed?`<div class="analysis-toast-warn">⚠ ${analysis.confirmation_note}</div>`:''}`;
   }
-
   toast.classList.add('open');
-  if (type !== 'warning' || !analysis?.flags?.length) {
-    setTimeout(() => toast.classList.remove('open'), 12000);
-  }
+  if (type !== 'warning' || !analysis?.flags?.length) setTimeout(() => toast.classList.remove('open'), 12000);
 }
-
+// ─── Bulk Upload ──────────────────────────────────────────────────────────────
+// Build a flat list of all checklist items for Claude to match against
+function getAllChecklistItems() {
+  const items = [];
+  SECTIONS.forEach(s => s.items.forEach(i => items.push({ sectionId: s.id, sectionLabel: s.label, itemId: i.id, title: i.title })));
+  return items;
+}
+let bulkFiles = []; // Array of { file, rowId, status, matchedSectionId, matchedItemId, matchLabel }
+let bulkRunning = false;
+function openBulkModal() {
+  bulkFiles = []; bulkRunning = false;
+  document.getElementById('bulkDropZone').style.display = 'block';
+  document.getElementById('bulkQueueSection').style.display = 'none';
+  document.getElementById('bulkProgressWrap').style.display = 'none';
+  document.getElementById('bulkFileQueue').innerHTML = '';
+  document.getElementById('bulkStartBtn').style.display = 'none';
+  document.getElementById('bulkDoneBtn').style.display = 'none';
+  document.getElementById('bulkCancelBtn').style.display = 'inline-block';
+  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
+  document.getElementById('bulkModal').classList.add('open');
+}
+function closeBulkModal() {
+  if (bulkRunning) return;
+  document.getElementById('bulkModal').classList.remove('open');
+  renderChecklist(); // refresh checklist to show any new data
+}
+// Wire up close button, cancel, drop zone, file input
+document.getElementById('bulkModalCloseBtn').onclick = () => { if (!bulkRunning) closeBulkModal(); };
+document.getElementById('bulkCancelBtn').onclick = () => { if (!bulkRunning) closeBulkModal(); };
+const dropZone = document.getElementById('bulkDropZone');
+const bulkFileInput = document.getElementById('bulkFileInput');
+document.getElementById('bulkBrowseBtn').onclick = e => { e.stopPropagation(); bulkFileInput.click(); };
+dropZone.onclick = () => bulkFileInput.click();
+dropZone.ondragover = e => { e.preventDefault(); dropZone.classList.add('drag-over'); };
+dropZone.ondragleave = () => dropZone.classList.remove('drag-over');
+dropZone.ondrop = e => { e.preventDefault(); dropZone.classList.remove('drag-over'); handleBulkFiles(e.dataTransfer.files); };
+bulkFileInput.onchange = e => handleBulkFiles(e.target.files);
+function handleBulkFiles(fileList) {
+  const allowed = Array.from(fileList).filter(f => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    return (f.type === 'application/pdf' || ext === 'pdf' || ext === 'xlsx' || ext === 'xls') && f.size <= 32 * 1024 * 1024;
+  });
+  if (!allowed.length) { alert('No valid files selected. Please choose PDF or Excel files under 32 MB.'); return; }
+  bulkFiles = allowed.map((file, i) => ({
+    file, rowId: 'bulk-row-' + i, status: 'waiting',
+    matchedSectionId: null, matchedItemId: null, matchLabel: ''
+  }));
+  // Show queue
+  dropZone.style.display = 'none';
+  document.getElementById('bulkQueueSection').style.display = 'block';
+  renderBulkQueue();
+  document.getElementById('bulkStartBtn').style.display = 'inline-block';
+  document.getElementById('bulkCancelBtn').style.display = 'inline-block';
+}
+function fileIcon(filename) {
+  const ext = filename.split('.').pop().toLowerCase();
+  if (ext === 'pdf') return '📄';
+  if (ext === 'xlsx' || ext === 'xls') return '📊';
+  return '📁';
+}
+function renderBulkQueue() {
+  const queue = document.getElementById('bulkFileQueue');
+  queue.innerHTML = bulkFiles.map(f => {
+    const badgeClass = { waiting:'badge-waiting', identifying:'badge-identifying', analyzing:'badge-analyzing', done:'badge-done', error:'badge-error', skipped:'badge-skipped' }[f.status] || 'badge-waiting';
+    const badgeText = { waiting:'Waiting', identifying:'Identifying…', analyzing:'Analyzing…', done:'Done ✓', error:'Error', skipped:'No match' }[f.status] || 'Waiting';
+    const rowClass = { done:'matched', error:'error', skipped:'skipped', identifying:'processing', analyzing:'processing' }[f.status] || '';
+    const matchClass = f.status === 'done' ? 'ok' : f.status === 'error' ? 'err' : f.status === 'skipped' ? 'warn' : '';
+    const matchText = f.matchLabel || (f.status === 'waiting' ? 'Will be auto-identified by Claude' : '');
+    return `<div class="file-row ${rowClass}" id="${f.rowId}">
+      <div class="file-row-icon">${fileIcon(f.file.name)}</div>
+      <div class="file-row-info">
+        <div class="file-row-name">${f.file.name}</div>
+        <div class="file-row-match ${matchClass}">${matchText}</div>
+      </div>
+      <div class="file-row-status"><span class="status-badge ${badgeClass}">${badgeText}</span></div>
+    </div>`;
+  }).join('');
+}
+function updateBulkRow(idx) {
+  const f = bulkFiles[idx];
+  const row = document.getElementById(f.rowId);
+  if (!row) return;
+  const badgeClass = { waiting:'badge-waiting', identifying:'badge-identifying', analyzing:'badge-analyzing', done:'badge-done', error:'badge-error', skipped:'badge-skipped' }[f.status] || 'badge-waiting';
+  const badgeText = { waiting:'Waiting', identifying:'Identifying…', analyzing:'Analyzing…', done:'Done ✓', error:'Error', skipped:'No match' }[f.status] || f.status;
+  const rowClass = { done:'matched', error:'error', skipped:'skipped', identifying:'processing', analyzing:'processing' }[f.status] || '';
+  const matchClass = f.status === 'done' ? 'ok' : f.status === 'error' ? 'err' : f.status === 'skipped' ? 'warn' : '';
+  row.className = 'file-row ' + rowClass;
+  row.querySelector('.file-row-match').className = 'file-row-match ' + matchClass;
+  row.querySelector('.file-row-match').textContent = f.matchLabel || '';
+  row.querySelector('.status-badge').className = 'status-badge ' + badgeClass;
+  row.querySelector('.status-badge').textContent = badgeText;
+}
+function updateBulkProgress(done, total) {
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.getElementById('bulkProgressFill').style.width = pct + '%';
+  document.getElementById('bulkProgressCount').textContent = `${done} / ${total}`;
+  document.getElementById('bulkProgressLabel').textContent = done === total ? 'All files processed!' : 'Processing files…';
+}
+async function startBulkAnalysis() {
+  if (bulkRunning || !bulkFiles.length) return;
+  bulkRunning = true;
+  document.getElementById('bulkStartBtn').style.display = 'none';
+  document.getElementById('bulkCancelBtn').style.display = 'none';
+  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'none';
+  document.getElementById('bulkProgressWrap').style.display = 'block';
+  updateBulkProgress(0, bulkFiles.length);
+  const allItems = getAllChecklistItems();
+  let doneCount = 0;
+  for (let i = 0; i < bulkFiles.length; i++) {
+    const entry = bulkFiles[i];
+    // Step 1 — Identify document
+    bulkFiles[i].status = 'identifying';
+    bulkFiles[i].matchLabel = 'Claude is identifying this document…';
+    updateBulkRow(i);
+    try {
+      const identResult = await identifyDocument(entry.file, allItems);
+      if (!identResult || identResult.itemId === 'none') {
+        bulkFiles[i].status = 'skipped';
+        bulkFiles[i].matchLabel = identResult?.reason || 'Could not match to any checklist item';
+        updateBulkRow(i);
+        doneCount++;
+        updateBulkProgress(doneCount, bulkFiles.length);
+        continue;
+      }
+      const matchedSection = SECTIONS.find(s => s.id === identResult.sectionId);
+      const matchedItem = matchedSection?.items.find(it => it.id === identResult.itemId);
+      bulkFiles[i].matchedSectionId = identResult.sectionId;
+      bulkFiles[i].matchedItemId = identResult.itemId;
+      bulkFiles[i].matchLabel = `→ [${matchedSection?.label}] ${matchedItem?.title || identResult.itemId}`;
+      // Step 2 — Analyze document
+      bulkFiles[i].status = 'analyzing';
+      updateBulkRow(i);
+      const ext = entry.file.name.split('.').pop().toLowerCase();
+      const isPdf = entry.file.type === 'application/pdf' || ext === 'pdf';
+      if (isPdf) {
+        const base64 = await readFileAsBase64(entry.file);
+        await analyzeDocumentWithClaude(base64, 'pdf', matchedItem.title, identResult.sectionId, identResult.itemId);
+      } else {
+        const ab = await readFileAsArrayBuffer(entry.file);
+        const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
+        const text = excelWorkbookToText(wb, entry.file.name);
+        await analyzeDocumentWithClaude(text, 'excel', matchedItem.title, identResult.sectionId, identResult.itemId);
+      }
+      bulkFiles[i].status = 'done';
+      updateBulkRow(i);
+    } catch (err) {
+      bulkFiles[i].status = 'error';
+      bulkFiles[i].matchLabel = 'Error: ' + (err.message || 'Unknown error');
+      updateBulkRow(i);
+    }
+    doneCount++;
+    updateBulkProgress(doneCount, bulkFiles.length);
+  }
+  bulkRunning = false;
+  document.getElementById('bulkDoneBtn').style.display = 'inline-block';
+  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
+  renderChecklist(); // refresh main checklist
+}
+async function identifyDocument(file, allItems) {
+  // Build a compact checklist index for Claude
+  const itemsIndex = allItems.map(it => `${it.sectionId}::${it.itemId} — [${it.sectionLabel}] ${it.title}`).join('\n');
+  const identPrompt = `You are an M&A due diligence analyst. Given a document, identify which single checklist item it best matches.
+CHECKLIST ITEMS (format: sectionId::itemId — description):
+${itemsIndex}
+Review the document and respond with ONLY a valid JSON object (no markdown, no preamble):
+{
+  "sectionId": "the sectionId string from above, or null if no match",
+  "itemId": "the itemId string from above, or 'none' if no match",
+  "confidence": "high" or "medium" or "low",
+  "reason": "One sentence explaining why this document matches this item (or why it doesn't match any item)"
+}
+Rules:
+- Pick the SINGLE best matching checklist item
+- If the document clearly does not match any item, return itemId: "none"
+- Only return itemId: "none" if you are confident there is no match`;
+  const ext = file.name.split('.').pop().toLowerCase();
+  const isPdf = file.type === 'application/pdf' || ext === 'pdf';
+  let messageContent;
+  if (isPdf) {
+    const base64 = await readFileAsBase64(file);
+    messageContent = [
+      { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
+      { type: 'text', text: identPrompt }
+    ];
+  } else {
+    const ab = await readFileAsArrayBuffer(file);
+    const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
+    const text = excelWorkbookToText(wb, file.name);
+    messageContent = [{ type: 'text', text: `The following is the content of an Excel spreadsheet:\n\n${text}\n\n${identPrompt}` }];
+  }
+  const response = await fetch('/api/proxy', {
+    method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-opus-4-6', max_tokens: 256, messages: [{ role: 'user', content: messageContent }] })
+  });
+  if (!response.ok) { const err = await response.json().catch(()=>({})); throw new Error(err.error?.message || 'API error ' + response.status); }
+  const result = await response.json();
+  const rawText = (result.content?.[0]?.text || '').trim();
+  try { const m = rawText.match(/\{[\s\S]*\}/); return JSON.parse(m ? m[0] : rawText); }
+  catch { return { itemId: 'none', reason: 'Could not parse identification response' }; }
+}
+// File reading helpers
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = e => resolve(e.target.result.split(',')[1]);
+    r.onerror = () => reject(new Error('Failed to read file'));
+    r.readAsDataURL(file);
+  });
+}
+function readFileAsArrayBuffer(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = e => resolve(e.target.result);
+    r.onerror = () => reject(new Error('Failed to read file'));
+    r.readAsArrayBuffer(file);
+  });
+}
 // ─── Init ─────────────────────────────────────────────────────────────────────
 document.getElementById('engagementDate').value = new Date().toISOString().split('T')[0];
 initSupabase();
