@@ -958,7 +958,7 @@ function handleDocUpload(file, sectionId, itemId) {
     reader.onload = async e => {
       try {
         const wb = XLSX.read(new Uint8Array(e.target.result), { type:'array', cellDates:true });
-        await analyzeDocumentWithClaude(excelWorkbookToText(wb, file.name), 'excel', item.title, sectionId, itemId);
+        await analyzeDocumentWithClaude(excelWorkbookToText(wb, file.name, { maxRows: 50, maxChars: 8000 }), 'excel', item.title, sectionId, itemId);
       } catch (err) { showAnalysisToast('error', item ? item.title : itemId, null, err.message); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } }
     };
     reader.readAsArrayBuffer(file);
@@ -1205,7 +1205,7 @@ async function processSingleFile(idx) {
     } else {
       const ab = await readFileAsArrayBuffer(entry.file);
       const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
-      const text = excelWorkbookToText(wb, entry.file.name);
+      const text = excelWorkbookToText(wb, entry.file.name, { maxRows: 50, maxChars: 8000 });
       await analyzeDocumentWithClaude(text, 'excel', matchedItem.title, identResult.sectionId, identResult.itemId);
     }
     bulkFiles[idx].status = 'done';
@@ -1363,7 +1363,7 @@ Rules:
   } else {
     const ab = await readFileAsArrayBuffer(file);
     const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
-    const text = excelWorkbookToText(wb, file.name, { maxRows: 5, maxChars: 2000 });
+    const text = excelWorkbookToText(wb, file.name, { maxRows: 0, maxChars: 800 });
     messageContent = [{ type: 'text', text: `The following is the content of an Excel spreadsheet:\n\n${text}\n\n${identPrompt}` }];
   }
   const response = await fetch('/api/proxy', {
