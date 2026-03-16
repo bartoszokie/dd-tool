@@ -953,8 +953,8 @@ function excelWorkbookToText(workbook, filename) {
     const header = nonEmpty[0].map(h => String(h??'').trim());
     parts.push('| ' + header.join(' | ') + ' |');
     parts.push('| ' + header.map(()=>'---').join(' | ') + ' |');
-    for (const row of nonEmpty.slice(1, 501)) parts.push('| ' + row.map(c => String(c??'').replace(/\|/g,'\\|').trim()).join(' | ') + ' |');
-    if (nonEmpty.length > 501) parts.push(`*(${nonEmpty.length - 501} more rows not shown)*`);
+    for (const row of nonEmpty.slice(1, 151)) parts.push('| ' + row.map(c => String(c??'').replace(/\|/g,'\\|').trim()).join(' | ') + ' |');
+    if (nonEmpty.length > 151) parts.push(`*(${nonEmpty.length - 151} more rows not shown)*`);
   }
   return parts.join('\n');
 }
@@ -1181,6 +1181,7 @@ async function startBulkAnalysis() {
     }
     doneCount++;
     updateBulkProgress(doneCount, bulkFiles.length);
+    if (i < bulkFiles.length - 1) await new Promise(r => setTimeout(r, 5000));
   }
   bulkRunning = false;
   document.getElementById('bulkDoneBtn').style.display = 'inline-block';
