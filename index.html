@@ -1115,7 +1115,7 @@ function fileIcon(filename) {
 }
 function renderBulkQueue() {
   const queue = document.getElementById('bulkFileQueue');
-  queue.innerHTML = bulkFiles.map(f => {
+  queue.innerHTML = bulkFiles.map((f, idx) => {
     const badgeClass = { waiting:'badge-waiting', identifying:'badge-identifying', analyzing:'badge-analyzing', done:'badge-done', error:'badge-error', skipped:'badge-skipped' }[f.status] || 'badge-waiting';
     const badgeText = { waiting:'Waiting', identifying:'Identifying…', analyzing:'Analyzing…', done:'Done ✓', error:'Error', skipped:'No match' }[f.status] || 'Waiting';
     const rowClass = { done:'matched', error:'error', skipped:'skipped', identifying:'processing', analyzing:'processing' }[f.status] || '';
