@@ -221,6 +221,8 @@ select.risk-high { color: #dc2626; }
 .bulk-progress-fill { height: 100%; background: linear-gradient(90deg, #5a9a2a, #8DC63F); border-radius: 4px; transition: width 0.4s; }
 .bulk-row-delete { background: none; border: none; color: #dc2626; font-size: 14px; cursor: pointer; padding: 2px 5px; border-radius: 4px; line-height: 1; opacity: 0.6; flex-shrink: 0; }
 .bulk-row-delete:hover { background: #fef2f2; opacity: 1; }
+.bulk-row-retry { background: none; border: 1.5px solid #8DC63F; color: #8DC63F; font-size: 11px; font-weight: 700; cursor: pointer; padding: 3px 9px; border-radius: 4px; line-height: 1.4; flex-shrink: 0; }
+.bulk-row-retry:hover { background: #f5faea; }
 .unmatched-section { margin-top: 28px; border-top: 2px dashed #fbbf24; padding-top: 16px; }
 .unmatched-section-title { font-size: 13px; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .unmatched-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 7px; margin-bottom: 8px; }
@@ -1136,6 +1138,7 @@ function renderBulkQueue() {
       <div class="file-row-status" style="display:flex;align-items:center;gap:6px;">
         <span class="status-badge ${badgeClass}">${badgeText}</span>
         ${f.status === 'waiting' ? `<button class="bulk-row-delete" onclick="removeBulkFile(${idx})" title="Remove file">✕</button>` : ''}
+        ${f.status === 'error' ? `<button class="bulk-row-retry" onclick="retryBulkFile(${idx})">↺ Retry</button>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -1148,6 +1151,50 @@ function removeBulkFile(idx) {
     document.getElementById('bulkDropZone').style.display = 'block';
     document.getElementById('bulkStartBtn').style.display = 'none';
   } else {
+    renderBulkQueue();
+  }
+}
+async function retryBulkFile(idx) {
+  if (bulkRunning) return;
+  const entry = bulkFiles[idx];
+  if (!entry) return;
+  const allItems = getAllChecklistItems();
+  bulkFiles[idx].status = 'identifying';
+  bulkFiles[idx].matchLabel = 'Claude is identifying this document…';
+  renderBulkQueue();
+  try {
+    const identResult = await identifyDocument(entry.file, allItems);
+    if (!identResult || identResult.itemId === 'none') {
+      bulkFiles[idx].status = 'skipped';
+      bulkFiles[idx].matchLabel = identResult?.reason || 'Could not match to any checklist item';
+      state.unmatchedFiles.push({ filename: entry.file.name, reason: identResult?.reason || 'Could not match to any checklist item' });
+      renderBulkQueue();
+      return;
+    }
+    const matchedSection = SECTIONS.find(s => s.id === identResult.sectionId);
+    const matchedItem = matchedSection?.items.find(it => it.id === identResult.itemId);
+    bulkFiles[idx].matchedSectionId = identResult.sectionId;
+    bulkFiles[idx].matchedItemId = identResult.itemId;
+    bulkFiles[idx].matchLabel = `→ [${matchedSection?.label}] ${matchedItem?.title || identResult.itemId}`;
+    bulkFiles[idx].status = 'analyzing';
+    renderBulkQueue();
+    const ext = entry.file.name.split('.').pop().toLowerCase();
+    const isPdf = entry.file.type === 'application/pdf' || ext === 'pdf';
+    if (isPdf) {
+      const base64 = await readFileAsBase64(entry.file);
+      await analyzeDocumentWithClaude(base64, 'pdf', matchedItem.title, identResult.sectionId, identResult.itemId);
+    } else {
+      const ab = await readFileAsArrayBuffer(entry.file);
+      const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
+      const text = excelWorkbookToText(wb, entry.file.name);
+      await analyzeDocumentWithClaude(text, 'excel', matchedItem.title, identResult.sectionId, identResult.itemId);
+    }
+    bulkFiles[idx].status = 'done';
+    renderBulkQueue();
+    renderChecklist();
+  } catch (err) {
+    bulkFiles[idx].status = 'error';
+    bulkFiles[idx].matchLabel = 'Error: ' + (err.message || 'Unknown error');
     renderBulkQueue();
   }
 }
