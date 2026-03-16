@@ -1062,22 +1062,28 @@ function getAllChecklistItems() {
 }
 let bulkFiles = []; // Array of { file, rowId, status, matchedSectionId, matchedItemId, matchLabel }
 let bulkRunning = false;
-function openBulkModal() {
+function resetBulkModal() {
   bulkFiles = []; bulkRunning = false;
+  bulkFileInput.value = '';
   document.getElementById('bulkDropZone').style.display = 'block';
   document.getElementById('bulkQueueSection').style.display = 'none';
   document.getElementById('bulkProgressWrap').style.display = 'none';
   document.getElementById('bulkFileQueue').innerHTML = '';
+  document.getElementById('bulkProgressFill').style.width = '0%';
   document.getElementById('bulkStartBtn').style.display = 'none';
   document.getElementById('bulkDoneBtn').style.display = 'none';
   document.getElementById('bulkCancelBtn').style.display = 'inline-block';
   document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
+}
+function openBulkModal() {
+  resetBulkModal();
   document.getElementById('bulkModal').classList.add('open');
 }
 function closeBulkModal() {
   if (bulkRunning) return;
   document.getElementById('bulkModal').classList.remove('open');
-  renderChecklist(); // refresh checklist to show any new data
+  resetBulkModal();
+  renderChecklist();
 }
 // Wire up close button, cancel, drop zone, file input
 document.getElementById('bulkModalCloseBtn').onclick = () => { if (!bulkRunning) closeBulkModal(); };
