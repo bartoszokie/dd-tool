@@ -966,20 +966,30 @@ function handleDocUpload(file, sectionId, itemId) {
   reader.onerror = () => { alert('Could not read the file.'); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } };
 }
 function excelWorkbookToText(workbook, filename) {
+  const MAX_ROWS = 150, MAX_CHARS = 60000;
   const parts = [`Excel file: ${filename}\n`];
   for (const sheetName of workbook.SheetNames) {
     const sheet = workbook.Sheets[sheetName];
     const rows = XLSX.utils.sheet_to_json(sheet, { header:1, defval:'' });
     const nonEmpty = rows.filter(r => r.some(c => c !== ''));
     if (!nonEmpty.length) continue;
+    // Find which column indices have at least one non-empty value (strip blank/spacer cols)
+    const maxCols = Math.max(...nonEmpty.map(r => r.length));
+    const usedCols = [];
+    for (let ci = 0; ci < maxCols; ci++) {
+      if (nonEmpty.some(r => String(r[ci] ?? '').trim() !== '')) usedCols.push(ci);
+    }
     parts.push(`\n--- Sheet: ${sheetName} ---`);
-    const header = nonEmpty[0].map(h => String(h??'').trim());
+    const header = usedCols.map(ci => String(nonEmpty[0][ci] ?? '').trim());
     parts.push('| ' + header.join(' | ') + ' |');
-    parts.push('| ' + header.map(()=>'---').join(' | ') + ' |');
-    for (const row of nonEmpty.slice(1, 151)) parts.push('| ' + row.map(c => String(c??'').replace(/\|/g,'\\|').trim()).join(' | ') + ' |');
-    if (nonEmpty.length > 151) parts.push(`*(${nonEmpty.length - 151} more rows not shown)*`);
+    parts.push('| ' + header.map(() => '---').join(' | ') + ' |');
+    for (const row of nonEmpty.slice(1, MAX_ROWS + 1))
+      parts.push('| ' + usedCols.map(ci => String(row[ci] ?? '').replace(/\|/g, '\\|').trim()).join(' | ') + ' |');
+    if (nonEmpty.length > MAX_ROWS + 1) parts.push(`*(${nonEmpty.length - MAX_ROWS - 1} more rows not shown)*`);
   }
-  return parts.join('\n');
+  let result = parts.join('\n');
+  if (result.length > MAX_CHARS) result = result.slice(0, MAX_CHARS) + '\n\n*(truncated — document too large to show in full)*';
+  return result;
 }
 async function analyzeDocumentWithClaude(content, fileType, itemTitle, sectionId, itemId) {
   const prompt = `You are a senior M&A due diligence analyst reviewing a document for an acquisition.
