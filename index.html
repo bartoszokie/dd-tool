@@ -966,7 +966,7 @@ function handleDocUpload(file, sectionId, itemId) {
   reader.onerror = () => { alert('Could not read the file.'); if (btn) { btn.textContent='Upload & Analyze'; btn.disabled=false; btn.classList.remove('analyzing'); } };
 }
 function excelWorkbookToText(workbook, filename) {
-  const MAX_ROWS = 150, MAX_CHARS = 60000;
+  const MAX_ROWS = 100, MAX_CHARS = 20000;
   const parts = [`Excel file: ${filename}\n`];
   for (const sheetName of workbook.SheetNames) {
     const sheet = workbook.Sheets[sheetName];
