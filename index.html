@@ -299,12 +299,9 @@ select.risk-high { color: #dc2626; }
     </div>
     <div class="bulk-modal-footer">
       <button class="btn btn-secondary" id="bulkCancelBtn">Cancel</button>
-      <button class="btn btn-purple" id="bulkStartBtn" style="display:none;" onclick="startBulkAnalysis()">
-        ✦ Analyze All Files
-      </button>
-      <button class="btn btn-secondary" id="bulkDoneBtn" style="display:none;" onclick="closeBulkModal()">
-        Done
-      </button>
+      <button class="btn btn-secondary" id="bulkAutoBtn" style="display:none;" onclick="startBulkAnalysis()">Auto-run All</button>
+      <button class="btn btn-purple" id="bulkNextBtn" style="display:none;" onclick="processNextFile()">▶ Process Next File</button>
+      <button class="btn btn-secondary" id="bulkDoneBtn" style="display:none;" onclick="closeBulkModal()">Done</button>
     </div>
   </div>
 </div>
@@ -1072,7 +1069,8 @@ function resetBulkModal() {
   document.getElementById('bulkProgressWrap').style.display = 'none';
   document.getElementById('bulkFileQueue').innerHTML = '';
   document.getElementById('bulkProgressFill').style.width = '0%';
-  document.getElementById('bulkStartBtn').style.display = 'none';
+  document.getElementById('bulkNextBtn').style.display = 'none';
+  document.getElementById('bulkAutoBtn').style.display = 'none';
   document.getElementById('bulkDoneBtn').style.display = 'none';
   document.getElementById('bulkCancelBtn').style.display = 'inline-block';
   document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
@@ -1112,7 +1110,8 @@ function handleBulkFiles(fileList) {
   dropZone.style.display = 'none';
   document.getElementById('bulkQueueSection').style.display = 'block';
   renderBulkQueue();
-  document.getElementById('bulkStartBtn').style.display = 'inline-block';
+  document.getElementById('bulkNextBtn').style.display = 'inline-block';
+  document.getElementById('bulkAutoBtn').style.display = 'inline-block';
   document.getElementById('bulkCancelBtn').style.display = 'inline-block';
 }
 function fileIcon(filename) {
@@ -1149,15 +1148,26 @@ function removeBulkFile(idx) {
   if (!bulkFiles.length) {
     document.getElementById('bulkQueueSection').style.display = 'none';
     document.getElementById('bulkDropZone').style.display = 'block';
-    document.getElementById('bulkStartBtn').style.display = 'none';
+    document.getElementById('bulkNextBtn').style.display = 'none';
+    document.getElementById('bulkAutoBtn').style.display = 'none';
   } else {
     renderBulkQueue();
   }
 }
 async function retryBulkFile(idx) {
   if (bulkRunning) return;
+  if (!bulkFiles[idx]) return;
+  await processSingleFile(idx);
+  const remaining = bulkFiles.filter(f => f.status === 'waiting' || f.status === 'error').length;
+  if (remaining === 0) {
+    showDoneState();
+  } else {
+    updateBulkProgressLabel();
+  }
+  renderChecklist();
+}
+async function processSingleFile(idx) {
   const entry = bulkFiles[idx];
-  if (!entry) return;
   const allItems = getAllChecklistItems();
   bulkFiles[idx].status = 'identifying';
   bulkFiles[idx].matchLabel = 'Claude is identifying this document…';
@@ -1191,7 +1201,6 @@ async function retryBulkFile(idx) {
     }
     bulkFiles[idx].status = 'done';
     renderBulkQueue();
-    renderChecklist();
   } catch (err) {
     bulkFiles[idx].status = 'error';
     bulkFiles[idx].matchLabel = 'Error: ' + (err.message || 'Unknown error');
@@ -1212,74 +1221,65 @@ function updateBulkRow(idx) {
   row.querySelector('.status-badge').className = 'status-badge ' + badgeClass;
   row.querySelector('.status-badge').textContent = badgeText;
 }
-function updateBulkProgress(done, total) {
-  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+function updateBulkProgressLabel() {
+  const done  = bulkFiles.filter(f => f.status === 'done' || f.status === 'skipped').length;
+  const total = bulkFiles.length;
+  const pct   = total > 0 ? Math.round((done / total) * 100) : 0;
   document.getElementById('bulkProgressFill').style.width = pct + '%';
   document.getElementById('bulkProgressCount').textContent = `${done} / ${total}`;
-  document.getElementById('bulkProgressLabel').textContent = done === total ? 'All files processed!' : 'Processing files…';
+  const remaining = total - done;
+  document.getElementById('bulkProgressLabel').textContent = remaining === 0 ? 'All files processed!' : `${remaining} file${remaining !== 1 ? 's' : ''} remaining`;
+}
+function showDoneState() {
+  document.getElementById('bulkNextBtn').style.display = 'none';
+  document.getElementById('bulkAutoBtn').style.display = 'none';
+  document.getElementById('bulkDoneBtn').style.display = 'inline-block';
+  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
+  document.getElementById('bulkProgressLabel').textContent = 'All files processed!';
+  renderChecklist();
+  renderBulkSummary();
+}
+async function processNextFile() {
+  if (bulkRunning) return;
+  const idx = bulkFiles.findIndex(f => f.status === 'waiting' || f.status === 'error');
+  if (idx === -1) { showDoneState(); return; }
+  bulkRunning = true;
+  document.getElementById('bulkNextBtn').disabled = true;
+  document.getElementById('bulkAutoBtn').disabled = true;
+  document.getElementById('bulkCancelBtn').style.display = 'none';
+  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'none';
+  document.getElementById('bulkProgressWrap').style.display = 'block';
+  await processSingleFile(idx);
+  bulkRunning = false;
+  const remaining = bulkFiles.filter(f => f.status === 'waiting' || f.status === 'error').length;
+  if (remaining === 0) {
+    showDoneState();
+  } else {
+    document.getElementById('bulkNextBtn').disabled = false;
+    document.getElementById('bulkAutoBtn').disabled = false;
+    document.getElementById('bulkCancelBtn').style.display = 'inline-block';
+    document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
+    updateBulkProgressLabel();
+  }
+  renderChecklist();
 }
 async function startBulkAnalysis() {
   if (bulkRunning || !bulkFiles.length) return;
   bulkRunning = true;
-  document.getElementById('bulkStartBtn').style.display = 'none';
+  document.getElementById('bulkNextBtn').style.display = 'none';
+  document.getElementById('bulkAutoBtn').style.display = 'none';
   document.getElementById('bulkCancelBtn').style.display = 'none';
   document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'none';
   document.getElementById('bulkProgressWrap').style.display = 'block';
-  updateBulkProgress(0, bulkFiles.length);
-  const allItems = getAllChecklistItems();
-  let doneCount = 0;
-  for (let i = 0; i < bulkFiles.length; i++) {
-    const entry = bulkFiles[i];
-    // Step 1 — Identify document
-    bulkFiles[i].status = 'identifying';
-    bulkFiles[i].matchLabel = 'Claude is identifying this document…';
-    updateBulkRow(i);
-    try {
-      const identResult = await identifyDocument(entry.file, allItems);
-      if (!identResult || identResult.itemId === 'none') {
-        bulkFiles[i].status = 'skipped';
-        bulkFiles[i].matchLabel = identResult?.reason || 'Could not match to any checklist item';
-        updateBulkRow(i);
-        state.unmatchedFiles.push({ filename: entry.file.name, reason: identResult?.reason || 'Could not match to any checklist item' });
-        doneCount++;
-        updateBulkProgress(doneCount, bulkFiles.length);
-        continue;
-      }
-      const matchedSection = SECTIONS.find(s => s.id === identResult.sectionId);
-      const matchedItem = matchedSection?.items.find(it => it.id === identResult.itemId);
-      bulkFiles[i].matchedSectionId = identResult.sectionId;
-      bulkFiles[i].matchedItemId = identResult.itemId;
-      bulkFiles[i].matchLabel = `→ [${matchedSection?.label}] ${matchedItem?.title || identResult.itemId}`;
-      // Step 2 — Analyze document
-      bulkFiles[i].status = 'analyzing';
-      updateBulkRow(i);
-      const ext = entry.file.name.split('.').pop().toLowerCase();
-      const isPdf = entry.file.type === 'application/pdf' || ext === 'pdf';
-      if (isPdf) {
-        const base64 = await readFileAsBase64(entry.file);
-        await analyzeDocumentWithClaude(base64, 'pdf', matchedItem.title, identResult.sectionId, identResult.itemId);
-      } else {
-        const ab = await readFileAsArrayBuffer(entry.file);
-        const wb = XLSX.read(new Uint8Array(ab), { type:'array', cellDates:true });
-        const text = excelWorkbookToText(wb, entry.file.name);
-        await analyzeDocumentWithClaude(text, 'excel', matchedItem.title, identResult.sectionId, identResult.itemId);
-      }
-      bulkFiles[i].status = 'done';
-      updateBulkRow(i);
-    } catch (err) {
-      bulkFiles[i].status = 'error';
-      bulkFiles[i].matchLabel = 'Error: ' + (err.message || 'Unknown error');
-      updateBulkRow(i);
-    }
-    doneCount++;
-    updateBulkProgress(doneCount, bulkFiles.length);
-    if (i < bulkFiles.length - 1) await new Promise(r => setTimeout(r, 5000));
+  updateBulkProgressLabel();
+  const pending = bulkFiles.map((f, i) => i).filter(i => bulkFiles[i].status === 'waiting' || bulkFiles[i].status === 'error');
+  for (let n = 0; n < pending.length; n++) {
+    await processSingleFile(pending[n]);
+    updateBulkProgressLabel();
+    if (n < pending.length - 1) await new Promise(r => setTimeout(r, 5000));
   }
   bulkRunning = false;
-  document.getElementById('bulkDoneBtn').style.display = 'inline-block';
-  document.getElementById('bulkModalCloseBtn').style.pointerEvents = 'auto';
-  renderChecklist();
-  renderBulkSummary();
+  showDoneState();
 }
 function renderBulkSummary() {
   const matched = bulkFiles.filter(f => f.status === 'done').length;
