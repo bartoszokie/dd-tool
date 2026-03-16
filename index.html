@@ -219,6 +219,14 @@ select.risk-high { color: #dc2626; }
 .bulk-progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #6b7c93; margin-bottom: 6px; }
 .bulk-progress-bar { height: 8px; background: #e8ecf0; border-radius: 4px; overflow: hidden; }
 .bulk-progress-fill { height: 100%; background: linear-gradient(90deg, #5a9a2a, #8DC63F); border-radius: 4px; transition: width 0.4s; }
+.bulk-row-delete { background: none; border: none; color: #dc2626; font-size: 14px; cursor: pointer; padding: 2px 5px; border-radius: 4px; line-height: 1; opacity: 0.6; flex-shrink: 0; }
+.bulk-row-delete:hover { background: #fef2f2; opacity: 1; }
+.unmatched-section { margin-top: 28px; border-top: 2px dashed #fbbf24; padding-top: 16px; }
+.unmatched-section-title { font-size: 13px; font-weight: 700; color: #d97706; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.unmatched-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 7px; margin-bottom: 8px; }
+.unmatched-row-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.unmatched-row-name { font-size: 13px; font-weight: 600; color: #0d1b2a; }
+.unmatched-row-note { font-size: 11px; color: #d97706; margin-top: 2px; }
 @media (max-width: 700px) {
   .screen { padding: 24px 16px; }
   .form-grid { grid-template-columns: 1fr; }
@@ -535,6 +543,7 @@ async function loadSelectedDeal() {
     if (error || !data) { alert('Could not load deal. Please try again.'); return; }
     state.dealId = data.id; state.companyName = data.name; state.dealValue = data.deal_value || '';
     state.analystName = data.analyst || ''; state.engagementDate = data.engagement_date || '';
+    state.unmatchedFiles = [];
     if (data.checklist_data) {
       Object.keys(data.checklist_data).forEach(sId => {
         if (state.checklist[sId]) {
@@ -577,7 +586,7 @@ function setSaveStatus(status) {
   if (status === 'saved') setTimeout(() => { el.style.opacity = '0.5'; }, 3000);
 }
 // ─── State ────────────────────────────────────────────────────────────────────
-const state = { companyName: '', dealValue: '', analystName: '', engagementDate: '', activeTab: 'corporate', dealId: null, checklist: {} };
+const state = { companyName: '', dealValue: '', analystName: '', engagementDate: '', activeTab: 'corporate', dealId: null, checklist: {}, unmatchedFiles: [] };
 // ─── Checklist Data ───────────────────────────────────────────────────────────
 const SECTIONS = [
   { id: 'corporate', label: 'Corporate & Entity', color: '#8DC63F', items: [
@@ -691,6 +700,7 @@ function startEngagement() {
   });
   state.companyName = companyName; state.dealValue = dealValue; state.analystName = analystName;
   state.engagementDate = engagementDate || new Date().toISOString().split('T')[0];
+  state.unmatchedFiles = [];
   document.getElementById('headerMeta').innerHTML = `<div><span>${companyName}</span></div><div>Deal Value: <span>${dealValue}</span></div><div>Analyst: <span>${analystName}</span></div>`;
   saveDeal();
   goToScreen('checklist');
@@ -767,7 +777,21 @@ function renderTabContent() {
           </tr>`;
         }).join('')}
       </tbody>
-    </table>`;
+    </table>
+    ${state.activeTab === 'corporate' && state.unmatchedFiles.length > 0 ? `
+    <div class="unmatched-section">
+      <div class="unmatched-section-title">
+        <span>⚠</span> Pending / Unmatched Files (${state.unmatchedFiles.length})
+      </div>
+      ${state.unmatchedFiles.map(f => `
+      <div class="unmatched-row">
+        <div class="unmatched-row-icon">${fileIcon(f.filename)}</div>
+        <div>
+          <div class="unmatched-row-name">${f.filename}</div>
+          <div class="unmatched-row-note">Could not be auto-matched — please assign manually</div>
+        </div>
+      </div>`).join('')}
+    </div>` : ''}`;
 }
 function renderChecklist() {
   document.getElementById('checklistHeading').textContent = `Document Checklist — ${state.companyName}`;
@@ -1103,9 +1127,23 @@ function renderBulkQueue() {
         <div class="file-row-name">${f.file.name}</div>
         <div class="file-row-match ${matchClass}">${matchText}</div>
       </div>
-      <div class="file-row-status"><span class="status-badge ${badgeClass}">${badgeText}</span></div>
+      <div class="file-row-status" style="display:flex;align-items:center;gap:6px;">
+        <span class="status-badge ${badgeClass}">${badgeText}</span>
+        ${f.status === 'waiting' ? `<button class="bulk-row-delete" onclick="removeBulkFile(${idx})" title="Remove file">✕</button>` : ''}
+      </div>
     </div>`;
   }).join('');
+}
+function removeBulkFile(idx) {
+  bulkFiles.splice(idx, 1);
+  bulkFiles.forEach((f, i) => { f.rowId = 'bulk-row-' + i; });
+  if (!bulkFiles.length) {
+    document.getElementById('bulkQueueSection').style.display = 'none';
+    document.getElementById('bulkDropZone').style.display = 'block';
+    document.getElementById('bulkStartBtn').style.display = 'none';
+  } else {
+    renderBulkQueue();
+  }
 }
 function updateBulkRow(idx) {
   const f = bulkFiles[idx];
@@ -1149,6 +1187,7 @@ async function startBulkAnalysis() {
         bulkFiles[i].status = 'skipped';
         bulkFiles[i].matchLabel = identResult?.reason || 'Could not match to any checklist item';
         updateBulkRow(i);
+        state.unmatchedFiles.push({ filename: entry.file.name, reason: identResult?.reason || 'Could not match to any checklist item' });
         doneCount++;
         updateBulkProgress(doneCount, bulkFiles.length);
         continue;
